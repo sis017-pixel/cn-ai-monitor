@@ -1,0 +1,70 @@
+papers:
+  - title: "DeepSeek-R1"
+    expected_institution: "DeepSeek"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face"
+    importance: 5
+    reason: "Major Chinese reasoning model paper."
+
+  - title: "Qwen"
+    expected_institution: "Alibaba / Qwen"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face / GitHub"
+    importance: 5
+    reason: "Major Chinese open-source LLM family."
+
+  - title: "Kimi"
+    expected_institution: "Moonshot AI"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face"
+    importance: 5
+    reason: "Major Chinese long-context / agentic AI model family."
+
+  - title: "MiniMax"
+    expected_institution: "MiniMax"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face"
+    importance: 4
+    reason: "Chinese frontier-model company; useful for institution matching."
+
+  - title: "Seed"
+    expected_institution: "ByteDance Seed"
+    expected_country: "CN"
+    source_hint: "arXiv / GitHub / Hugging Face"
+    importance: 4
+    reason: "Chinese tech-company AI lab; useful for GitHub and paper tracking."
+
+  - title: "InternVL"
+    expected_institution: "Shanghai AI Lab"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face"
+    importance: 4
+    reason: "Chinese multimodal model family."
+
+  - title: "GLM"
+    expected_institution: "Zhipu AI / Tsinghua"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face"
+    importance: 4
+    reason: "Important Chinese LLM family."
+
+  - title: "Baichuan"
+    expected_institution: "Baichuan AI"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face"
+    importance: 3
+    reason: "Chinese LLM company; useful for alias matching."
+
+  - title: "ERNIE"
+    expected_institution: "Baidu"
+    expected_country: "CN"
+    source_hint: "arXiv / company release"
+    importance: 3
+    reason: "Major Chinese tech-company model family."
+
+  - title: "Hunyuan"
+    expected_institution: "Tencent"
+    expected_country: "CN"
+    source_hint: "arXiv / Hugging Face / GitHub"
+    importance: 3
+    reason: "Major Chinese tech-company AI model family."
