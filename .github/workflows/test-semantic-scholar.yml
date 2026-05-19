@@ -1,0 +1,32 @@
+name: Test Semantic Scholar API
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  test-semantic-scholar:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: paper-monitor
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Test Semantic Scholar API
+        env:
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
+        run: uv run python src/paper_monitor/test_semantic_scholar.py
