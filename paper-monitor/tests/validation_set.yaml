@@ -1,70 +1,561 @@
-papers:
-  - title: "DeepSeek-R1"
-    expected_institution: "DeepSeek"
-    expected_country: "CN"
-    source_hint: "arXiv / Hugging Face"
-    importance: 5
-    reason: "Major Chinese reasoning model paper."
+schema_version: 1
+last_updated: "2026-05-20"
+scope: "Representative validation set for Chinese AI research/model monitoring."
+notes:
+  - "This is not a complete inventory of every Chinese AI model. It is a high-signal benchmark set for testing detection, institution matching, alias matching, and significance scoring."
+  - "expected_country means Chinese institutional/company affiliation, not that the paper topic is China or that the model only works in Chinese."
+  - "importance scale: 5 = must-capture frontier/signature model; 4 = important model family or major modality; 3 = useful institution/alias test case."
+  - "arxiv_id is null when the model is mainly validated through official product pages, GitHub/Hugging Face pages, or reputable news coverage rather than a stable arXiv technical report."
 
-  - title: "Qwen"
+papers:
+  - id: "deepseek_v3"
+    title: "DeepSeek-V3 Technical Report"
+    aliases: ["DeepSeek-V3", "DeepSeek V3", "DeepSeek-V3-Base"]
+    expected_institution: "DeepSeek-AI"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "reasoning", "coding"]
+    arxiv_id: "2412.19437"
+    source_hint: ["arXiv", "Hugging Face", "GitHub"]
+    importance: 5
+    reason: "Frontier Chinese MoE LLM and major open-source benchmark target."
+
+  - id: "deepseek_r1"
+    title: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning"
+    aliases: ["DeepSeek-R1", "DeepSeek R1", "DeepSeek-R1-Zero"]
+    expected_institution: "DeepSeek-AI"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "reasoning", "math", "coding"]
+    arxiv_id: "2501.12948"
+    source_hint: ["arXiv", "Hugging Face", "GitHub"]
+    importance: 5
+    reason: "Signature Chinese reasoning model; must be detected as high significance."
+
+  - id: "qwen3"
+    title: "Qwen3 Technical Report"
+    aliases: ["Qwen3", "Qwen 3", "Qwen3-MoE", "Qwen"]
     expected_institution: "Alibaba / Qwen"
     expected_country: "CN"
-    source_hint: "arXiv / Hugging Face / GitHub"
+    expected_entity_type: "company"
+    modality: ["text", "reasoning", "multilingual", "coding"]
+    arxiv_id: "2505.09388"
+    source_hint: ["arXiv", "Hugging Face", "ModelScope", "GitHub"]
     importance: 5
-    reason: "Major Chinese open-source LLM family."
+    reason: "Major Alibaba open model family with dense and MoE variants."
 
-  - title: "Kimi"
+  - id: "qwen2_5"
+    title: "Qwen2.5 Technical Report"
+    aliases: ["Qwen2.5", "Qwen 2.5", "Qwen2.5-Max"]
+    expected_institution: "Alibaba / Qwen"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "coding", "math", "multilingual"]
+    arxiv_id: "2412.15115"
+    source_hint: ["arXiv", "Hugging Face", "ModelScope", "GitHub"]
+    importance: 5
+    reason: "Major Qwen model generation and important baseline for Chinese open LLMs."
+
+  - id: "qwen2_5_vl"
+    title: "Qwen2.5-VL Technical Report"
+    aliases: ["Qwen2.5-VL", "Qwen 2.5 VL", "Qwen-VL"]
+    expected_institution: "Alibaba / Qwen"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["vision-language", "multimodal", "document understanding", "visual agent"]
+    arxiv_id: "2502.13923"
+    source_hint: ["arXiv", "Hugging Face", "GitHub"]
+    importance: 5
+    reason: "Flagship Chinese VLM with strong document, video, and agentic visual capabilities."
+
+  - id: "qwq_32b"
+    title: "QwQ-32B"
+    aliases: ["QwQ", "QwQ-32B", "Qwen reasoning model"]
+    expected_institution: "Alibaba / Qwen"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "reasoning", "math", "coding"]
+    arxiv_id: null
+    source_hint: ["Hugging Face", "Qwen official"]
+    importance: 4
+    reason: "Important Qwen reasoning model and useful alias-matching case."
+
+  - id: "kimi_k1_5"
+    title: "Kimi k1.5: Scaling Reinforcement Learning with LLMs"
+    aliases: ["Kimi k1.5", "Kimi-k1.5", "Kimi 1.5"]
     expected_institution: "Moonshot AI"
     expected_country: "CN"
-    source_hint: "arXiv / Hugging Face"
+    expected_entity_type: "company"
+    modality: ["text", "reasoning", "multimodal", "coding"]
+    arxiv_id: "2501.12599"
+    source_hint: ["arXiv", "GitHub", "Moonshot AI"]
     importance: 5
-    reason: "Major Chinese long-context / agentic AI model family."
+    reason: "Major Moonshot reasoning/multimodal model with strong RL-scaling signal."
 
-  - title: "MiniMax"
-    expected_institution: "MiniMax"
+  - id: "kimi_k2"
+    title: "Kimi K2: Open Agentic Intelligence"
+    aliases: ["Kimi K2", "Kimi-K2", "Moonshot K2"]
+    expected_institution: "Moonshot AI"
     expected_country: "CN"
-    source_hint: "arXiv / Hugging Face"
-    importance: 4
-    reason: "Chinese frontier-model company; useful for institution matching."
+    expected_entity_type: "company"
+    modality: ["text", "agentic AI", "coding", "reasoning"]
+    arxiv_id: "2507.20534"
+    source_hint: ["arXiv", "GitHub", "Moonshot AI"]
+    importance: 5
+    reason: "Major open agentic model from Moonshot AI."
 
-  - title: "Seed"
-    expected_institution: "ByteDance Seed"
+  - id: "kimi_k2_5"
+    title: "Kimi K2.5: Visual Agentic Intelligence"
+    aliases: ["Kimi K2.5", "Kimi-K2.5", "Kimi visual agent"]
+    expected_institution: "Moonshot AI"
     expected_country: "CN"
-    source_hint: "arXiv / GitHub / Hugging Face"
-    importance: 4
-    reason: "Chinese tech-company AI lab; useful for GitHub and paper tracking."
+    expected_entity_type: "company"
+    modality: ["multimodal", "vision-language", "agentic AI", "coding"]
+    arxiv_id: "2602.02276"
+    source_hint: ["arXiv", "Hugging Face", "Moonshot AI"]
+    importance: 5
+    reason: "Recent multimodal/agentic continuation of Kimi K2 family."
 
-  - title: "InternVL"
-    expected_institution: "Shanghai AI Lab"
-    expected_country: "CN"
-    source_hint: "arXiv / Hugging Face"
-    importance: 4
-    reason: "Chinese multimodal model family."
-
-  - title: "GLM"
+  - id: "glm_4_5"
+    title: "GLM-4.5: Agentic, Reasoning, and Coding Foundation Models"
+    aliases: ["GLM-4.5", "GLM 4.5", "Zhipu GLM", "Z.ai GLM"]
     expected_institution: "Zhipu AI / Tsinghua"
     expected_country: "CN"
-    source_hint: "arXiv / Hugging Face"
-    importance: 4
-    reason: "Important Chinese LLM family."
+    expected_entity_type: "company-university"
+    modality: ["text", "agentic AI", "reasoning", "coding"]
+    arxiv_id: "2508.06471"
+    source_hint: ["arXiv", "Zhipu AI", "GitHub"]
+    importance: 5
+    reason: "Major Chinese agentic/coding model family from Zhipu AI."
 
-  - title: "Baichuan"
+  - id: "chatglm3"
+    title: "ChatGLM3"
+    aliases: ["ChatGLM3", "ChatGLM3-6B", "GLM dialogue model"]
+    expected_institution: "Zhipu AI / Tsinghua KEG"
+    expected_country: "CN"
+    expected_entity_type: "company-university"
+    modality: ["text", "chat", "bilingual"]
+    arxiv_id: null
+    source_hint: ["GitHub", "Hugging Face"]
+    importance: 4
+    reason: "Important older Chinese open dialogue model; useful for alias and institution matching."
+
+  - id: "baichuan2"
+    title: "Baichuan 2: Open Large-scale Language Models"
+    aliases: ["Baichuan 2", "Baichuan2", "Baichuan-13B", "Baichuan AI"]
     expected_institution: "Baichuan AI"
     expected_country: "CN"
-    source_hint: "arXiv / Hugging Face"
-    importance: 3
-    reason: "Chinese LLM company; useful for alias matching."
+    expected_entity_type: "company"
+    modality: ["text", "bilingual", "domain"]
+    arxiv_id: "2309.10305"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 4
+    reason: "Representative Chinese open LLM from one of the AI tiger startups."
 
-  - title: "ERNIE"
-    expected_institution: "Baidu"
+  - id: "yi_01ai"
+    title: "Yi: Open Foundation Models by 01.AI"
+    aliases: ["Yi", "Yi-34B", "Yi-6B", "01.AI Yi", "Yi-VL"]
+    expected_institution: "01.AI"
     expected_country: "CN"
-    source_hint: "arXiv / company release"
-    importance: 3
-    reason: "Major Chinese tech-company model family."
+    expected_entity_type: "company"
+    modality: ["text", "vision-language", "long context", "bilingual"]
+    arxiv_id: "2403.04652"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 4
+    reason: "Important Chinese open foundation model family."
 
-  - title: "Hunyuan"
+  - id: "minimax_01"
+    title: "MiniMax-01: Scaling Foundation Models with Lightning Attention"
+    aliases: ["MiniMax-01", "MiniMax-Text-01", "MiniMax-VL-01", "MiniMax"]
+    expected_institution: "MiniMax"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "vision-language", "long context", "MoE"]
+    arxiv_id: "2501.08313"
+    source_hint: ["arXiv", "Hugging Face", "GitHub"]
+    importance: 5
+    reason: "Major Chinese long-context foundation model family."
+
+  - id: "hailuo_ai"
+    title: "Hailuo AI"
+    aliases: ["Hailuo", "Hailuo AI", "MiniMax Hailuo"]
+    expected_institution: "MiniMax"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["video generation", "image generation"]
+    arxiv_id: null
+    source_hint: ["official site", "news"]
+    importance: 4
+    reason: "Major MiniMax consumer-facing video/image generation product."
+
+  - id: "seed1_5_thinking"
+    title: "Seed1.5-Thinking"
+    aliases: ["Seed1.5-Thinking", "Seed 1.5 Thinking", "ByteDance Seed", "Doubao reasoning"]
+    expected_institution: "ByteDance Seed"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "reasoning", "STEM", "coding"]
+    arxiv_id: "2504.13914"
+    source_hint: ["arXiv", "Volcano Engine", "Doubao"]
+    importance: 5
+    reason: "Important ByteDance/Seed reasoning model."
+
+  - id: "seed1_5_vl"
+    title: "Seed1.5-VL Technical Report"
+    aliases: ["Seed1.5-VL", "Seed 1.5 VL", "Doubao vision", "ByteDance Seed VL"]
+    expected_institution: "ByteDance Seed"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["vision-language", "multimodal", "visual reasoning", "GUI agent"]
+    arxiv_id: "2505.07062"
+    source_hint: ["arXiv", "Hugging Face", "Volcano Engine"]
+    importance: 5
+    reason: "Major ByteDance vision-language foundation model."
+
+  - id: "hunyuan_large"
+    title: "Hunyuan-Large: An Open-Source MoE Model with 52 Billion Activated Parameters by Tencent"
+    aliases: ["Hunyuan-Large", "Tencent Hunyuan", "Hunyuan MoE"]
     expected_institution: "Tencent"
     expected_country: "CN"
-    source_hint: "arXiv / Hugging Face / GitHub"
+    expected_entity_type: "company"
+    modality: ["text", "MoE", "long context"]
+    arxiv_id: "2411.02265"
+    source_hint: ["arXiv", "Hugging Face", "GitHub"]
+    importance: 5
+    reason: "Major Tencent open-source MoE LLM."
+
+  - id: "hunyuan_image_3"
+    title: "HunyuanImage 3.0 Technical Report"
+    aliases: ["HunyuanImage 3.0", "Tencent HunyuanImage", "Hunyuan Image"]
+    expected_institution: "Tencent"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["image generation", "multimodal", "autoregressive generation"]
+    arxiv_id: "2509.23951"
+    source_hint: ["arXiv", "GitHub"]
+    importance: 4
+    reason: "Tencent image-generation foundation model; useful non-text modality case."
+
+  - id: "hunyuan_mt"
+    title: "Hunyuan-MT Technical Report"
+    aliases: ["Hunyuan-MT", "Hunyuan MT", "Tencent translation model"]
+    expected_institution: "Tencent"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["machine translation", "multilingual", "text"]
+    arxiv_id: "2509.05209"
+    source_hint: ["arXiv"]
     importance: 3
-    reason: "Major Chinese tech-company AI model family."
+    reason: "Useful Tencent multilingual/translation model case."
+
+  - id: "ernie_4_5"
+    title: "ERNIE 4.5"
+    aliases: ["ERNIE 4.5", "Ernie 4.5", "ERNIE X1", "Baidu ERNIE"]
+    expected_institution: "Baidu"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "reasoning", "multimodal"]
+    arxiv_id: null
+    source_hint: ["official technical report", "news"]
+    importance: 5
+    reason: "Major Baidu foundation model family; important Chinese big-tech baseline."
+
+  - id: "pangu_ultra"
+    title: "Pangu Ultra: Pushing the Limits of Dense Large Language Models on Ascend NPUs"
+    aliases: ["Pangu Ultra", "PanGu Ultra", "Pangu", "Huawei Pangu"]
+    expected_institution: "Huawei"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "dense LLM", "domestic chips"]
+    arxiv_id: "2504.07866"
+    source_hint: ["arXiv", "Huawei"]
+    importance: 4
+    reason: "Major Huawei foundation model and domestic-compute signal."
+
+  - id: "internlm2"
+    title: "InternLM2 Technical Report"
+    aliases: ["InternLM2", "InternLM", "InternLM3", "书生浦语"]
+    expected_institution: "Shanghai AI Laboratory"
+    expected_country: "CN"
+    expected_entity_type: "research-lab"
+    modality: ["text", "long context", "open-source LLM"]
+    arxiv_id: "2403.17297"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 4
+    reason: "Major Shanghai AI Lab open LLM family."
+
+  - id: "internvl3"
+    title: "InternVL3: Exploring Advanced Training and Test-Time Recipes for Open-Source Multimodal Models"
+    aliases: ["InternVL3", "InternVL", "OpenGVLab InternVL"]
+    expected_institution: "Shanghai AI Laboratory / OpenGVLab"
+    expected_country: "CN"
+    expected_entity_type: "research-lab"
+    modality: ["vision-language", "multimodal", "visual reasoning"]
+    arxiv_id: "2504.10479"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 5
+    reason: "Major Chinese open-source multimodal model family."
+
+  - id: "internvl3_5"
+    title: "InternVL3.5: Advancing Open-Source Multimodal Models"
+    aliases: ["InternVL3.5", "InternVL 3.5", "InternVL3.5-78B"]
+    expected_institution: "Shanghai AI Laboratory / OpenGVLab"
+    expected_country: "CN"
+    expected_entity_type: "research-lab"
+    modality: ["vision-language", "multimodal", "reasoning", "agentic"]
+    arxiv_id: "2508.18265"
+    source_hint: ["arXiv", "Hugging Face", "official blog"]
+    importance: 5
+    reason: "Recent high-performing InternVL multimodal model; good recency test."
+
+  - id: "minicpm_v_4_5"
+    title: "MiniCPM-V 4.5: Cooking Efficient MLLMs via Architecture, Data, and Training Recipe"
+    aliases: ["MiniCPM-V", "MiniCPM-V 4.5", "MiniCPM-o", "OpenBMB MiniCPM"]
+    expected_institution: "OpenBMB / Tsinghua University / ModelBest"
+    expected_country: "CN"
+    expected_entity_type: "university-company"
+    modality: ["vision-language", "multimodal", "efficient MLLM"]
+    arxiv_id: "2509.18154"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 4
+    reason: "Important efficient Chinese MLLM family."
+
+  - id: "aquila2"
+    title: "Aquila2 Technical Report"
+    aliases: ["Aquila2", "Aquila", "BAAI Aquila", "FlagOpen Aquila"]
+    expected_institution: "BAAI"
+    expected_country: "CN"
+    expected_entity_type: "research-institute"
+    modality: ["text", "bilingual", "open-source LLM"]
+    arxiv_id: "2408.07410"
+    source_hint: ["arXiv", "Hugging Face", "GitHub"]
+    importance: 3
+    reason: "BAAI bilingual model; useful research-institute matching case."
+
+  - id: "bge_m3"
+    title: "BGE M3-Embedding: Multi-Lingual, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation"
+    aliases: ["BGE-M3", "BAAI/bge-m3", "M3-Embedding", "FlagEmbedding"]
+    expected_institution: "BAAI"
+    expected_country: "CN"
+    expected_entity_type: "research-institute"
+    modality: ["embedding", "retrieval", "RAG", "multilingual"]
+    arxiv_id: "2402.03216"
+    source_hint: ["arXiv", "Hugging Face", "GitHub"]
+    importance: 4
+    reason: "Important Chinese embedding model; directly relevant to your pgvector/RAG stack."
+
+  - id: "skywork_13b"
+    title: "Skywork: A More Open Bilingual Foundation Model"
+    aliases: ["Skywork", "Skywork-13B", "Kunlun Skywork"]
+    expected_institution: "Skywork AI / Kunlun Tech"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "bilingual", "open-source LLM"]
+    arxiv_id: "2310.19341"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 3
+    reason: "Useful Chinese bilingual open LLM and corpus case."
+
+  - id: "skywork_r1v3"
+    title: "Skywork-R1V3 Technical Report"
+    aliases: ["Skywork-R1V3", "Skywork R1V", "Skywork visual reasoning"]
+    expected_institution: "Skywork AI"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["vision-language", "multimodal reasoning"]
+    arxiv_id: "2507.06167"
+    source_hint: ["arXiv", "Hugging Face"]
+    importance: 4
+    reason: "Recent Chinese multimodal reasoning model; useful modality and recency test."
+
+  - id: "telechat"
+    title: "TeleChat Technical Report"
+    aliases: ["TeleChat", "TeleChat-7B", "TeleChat-12B", "TeleAI"]
+    expected_institution: "China Telecom / TeleAI"
+    expected_country: "CN"
+    expected_entity_type: "state-owned-company-lab"
+    modality: ["text", "chat", "bilingual"]
+    arxiv_id: "2401.03804"
+    source_hint: ["arXiv", "GitHub"]
+    importance: 3
+    reason: "Useful state-owned enterprise AI lab case."
+
+  - id: "moss"
+    title: "MOSS: An Open Conversational Large Language Model"
+    aliases: ["MOSS", "OpenMOSS", "MOSS-16B"]
+    expected_institution: "Fudan University / OpenMOSS"
+    expected_country: "CN"
+    expected_entity_type: "university"
+    modality: ["text", "chat", "open-source LLM"]
+    arxiv_id: null
+    source_hint: ["paper", "GitHub"]
+    importance: 3
+    reason: "Early Chinese open conversational LLM; useful university-origin baseline."
+
+  - id: "step_video_t2v"
+    title: "Step-Video-T2V Technical Report"
+    aliases: ["Step-Video-T2V", "Step Video", "StepFun video model"]
+    expected_institution: "StepFun"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["video generation", "text-to-video"]
+    arxiv_id: "2502.10248"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 4
+    reason: "Major Chinese open text-to-video model."
+
+  - id: "step_audio"
+    title: "Step-Audio: Unified Understanding and Generation in Intelligent Speech Interaction"
+    aliases: ["Step-Audio", "Step Audio", "StepFun audio"]
+    expected_institution: "StepFun"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["audio", "speech", "speech interaction", "multimodal"]
+    arxiv_id: "2502.11946"
+    source_hint: ["arXiv", "GitHub"]
+    importance: 4
+    reason: "Major Chinese open audio-language model."
+
+  - id: "step1x_edit"
+    title: "Step1X-Edit: A Practical Framework for General Image Editing"
+    aliases: ["Step1X-Edit", "Step1X Edit", "StepFun image editing"]
+    expected_institution: "StepFun"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["image editing", "multimodal", "generation"]
+    arxiv_id: "2504.17761"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 4
+    reason: "Important Chinese image-editing model; useful non-LLM modality case."
+
+  - id: "step_audio_r1"
+    title: "Step-Audio-R1 Technical Report"
+    aliases: ["Step-Audio-R1", "Step Audio R1", "StepFun audio reasoning"]
+    expected_institution: "StepFun"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["audio", "reasoning", "speech", "multimodal"]
+    arxiv_id: "2511.15848"
+    source_hint: ["arXiv", "GitHub"]
+    importance: 4
+    reason: "Chinese audio reasoning model; useful for cross-modal reasoning detection."
+
+  - id: "cogvideox"
+    title: "CogVideoX: Text-to-Video Diffusion Models with An Expert Transformer"
+    aliases: ["CogVideoX", "CogVideo", "Zhipu CogVideoX"]
+    expected_institution: "Zhipu AI / Tsinghua University"
+    expected_country: "CN"
+    expected_entity_type: "company-university"
+    modality: ["video generation", "text-to-video", "diffusion"]
+    arxiv_id: "2408.06072"
+    source_hint: ["arXiv", "GitHub", "Hugging Face"]
+    importance: 5
+    reason: "Major Chinese open-source text-to-video model."
+
+  - id: "vidu"
+    title: "Vidu: a Highly Consistent, Dynamic and Skilled Text-to-Video Generator with Diffusion Models"
+    aliases: ["Vidu", "Vidu AI", "Shengshu Vidu"]
+    expected_institution: "Shengshu Technology / Tsinghua University"
+    expected_country: "CN"
+    expected_entity_type: "company-university"
+    modality: ["video generation", "text-to-video", "image-to-video"]
+    arxiv_id: "2405.04233"
+    source_hint: ["arXiv", "official site"]
+    importance: 4
+    reason: "Important Chinese video generation model and Sora-comparison case."
+
+  - id: "kling_ai"
+    title: "Kling AI"
+    aliases: ["Kling", "Kling AI", "Kuaishou Kling", "Kolors"]
+    expected_institution: "Kuaishou"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["video generation", "image generation", "sound generation"]
+    arxiv_id: null
+    source_hint: ["official site", "news"]
+    importance: 5
+    reason: "Major Chinese commercial video generation platform."
+
+  - id: "doubao_jimeng"
+    title: "Jimeng AI / Doubao creative models"
+    aliases: ["Jimeng AI", "Doubao", "ByteDance Jimeng", "Dreamina"]
+    expected_institution: "ByteDance"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["image generation", "video generation", "creative AI"]
+    arxiv_id: null
+    source_hint: ["news", "official product"]
+    importance: 4
+    reason: "ByteDance creative AI product family; useful commercial-model alias case."
+
+  - id: "sensetime_sensenova"
+    title: "SenseNova"
+    aliases: ["SenseNova", "SenseNova 5.5", "SenseNova U1", "SenseTime large model"]
+    expected_institution: "SenseTime"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "image generation", "vision", "multimodal"]
+    arxiv_id: null
+    source_hint: ["official site", "news"]
+    importance: 4
+    reason: "Major Chinese AI company foundation-model family."
+
+  - id: "iflytek_spark"
+    title: "iFLYTEK SparkDesk"
+    aliases: ["SparkDesk", "iFLYTEK Spark", "Spark V4.0", "讯飞星火"]
+    expected_institution: "iFLYTEK"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "speech", "education", "enterprise AI"]
+    arxiv_id: null
+    source_hint: ["official site", "news"]
+    importance: 3
+    reason: "Important Chinese speech/LLM company; useful commercial alias-matching case."
+
+  - id: "ernie_bot"
+    title: "ERNIE Bot"
+    aliases: ["ERNIE Bot", "Wenxin Yiyan", "文心一言", "Baidu chatbot"]
+    expected_institution: "Baidu"
+    expected_country: "CN"
+    expected_entity_type: "company"
+    modality: ["text", "chat", "multimodal"]
+    arxiv_id: null
+    source_hint: ["official product", "news"]
+    importance: 3
+    reason: "Baidu consumer chatbot product; useful Chinese/English alias test."
+
+  - id: "baichuan_alignment"
+    title: "Baichuan Alignment Technical Report"
+    aliases: ["Baichuan Alignment", "Baichuan-Instruct", "Baichuan aligned model"]
+    expected_institution: "Baichuan AI / PKU-Baichuan MLSystemLab"
+    expected_country: "CN"
+    expected_entity_type: "company-university"
+    modality: ["alignment", "instruction tuning", "text"]
+    arxiv_id: "2410.14940"
+    source_hint: ["arXiv", "Hugging Face"]
+    importance: 3
+    reason: "Useful Chinese alignment-method paper rather than only foundation-model release."
+
+  - id: "aquila_med"
+    title: "Aquila-Med LLM: Pioneering Full-Process Open-Source Medical Language Models"
+    aliases: ["Aquila-Med", "AquilaMed", "BAAI Aquila-Med"]
+    expected_institution: "BAAI"
+    expected_country: "CN"
+    expected_entity_type: "research-institute"
+    modality: ["medical AI", "text", "domain LLM"]
+    arxiv_id: "2406.12182"
+    source_hint: ["arXiv", "Hugging Face"]
+    importance: 3
+    reason: "Domain-specific Chinese medical LLM case."
+
+  - id: "moss_audio"
+    title: "MOSS-Audio"
+    aliases: ["MOSS-Audio", "OpenMOSS Audio", "MOSS audio model"]
+    expected_institution: "OpenMOSS / Fudan ecosystem"
+    expected_country: "CN"
+    expected_entity_type: "university-lab"
+    modality: ["audio", "speech", "multimodal"]
+    arxiv_id: null
+    source_hint: ["GitHub", "official site"]
+    importance: 3
+    reason: "Useful Chinese open audio model family for modality coverage."
