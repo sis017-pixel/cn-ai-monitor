@@ -1,0 +1,56 @@
+name: Run paper monitor pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: paper-monitor
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run fetch layer
+        env:
+          CONTACT_EMAIL: sis017@ucsd.edu
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          ARXIV_BATCH_SIZE: "50"
+          ARXIV_MAX_PAGES: "5"
+          OPENALEX_MAX_PAPERS: "300"
+          OPENALEX_WORKERS: "2"
+          OPENALEX_SLEEP_SECONDS: "0.25"
+          OPENALEX_MIN_TITLE_SCORE: "0.85"
+        run: uv run python src/paper_monitor/fetch.py
+
+      - name: Find latest raw paper file
+        id: latest_raw
+        shell: bash
+        run: |
+          latest_file=$(ls -t data/raw/papers_*.json | head -n 1)
+          echo "latest_file=$latest_file" >> "$GITHUB_OUTPUT"
+          echo "Latest raw file: $latest_file"
+
+      - name: Run classification layer
+        run: uv run python src/paper_monitor/classify.py --input "${{ steps.latest_raw.outputs.latest_file }}"
+
+      - name: Upload raw and processed data
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-monitor-data
+          path: |
+            paper-monitor/data/raw/*.json
+            paper-monitor/data/processed/*.json
