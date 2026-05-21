@@ -1,0 +1,30 @@
+{
+  "run_date": "2026-05-22T07:10:12",
+  "input_path": "C:\\Users\\HP\\Desktop\\cn-ai-monitor\\paper-monitor\\data\\raw\\papers_2026-05-21.json",
+  "classified_path": "C:\\Users\\HP\\Desktop\\cn-ai-monitor\\paper-monitor\\data\\processed\\classified_papers_2026-05-21.json",
+  "selected_path": "C:\\Users\\HP\\Desktop\\cn-ai-monitor\\paper-monitor\\data\\processed\\selected_papers_2026-05-21.json",
+  "review_candidates_path": "C:\\Users\\HP\\Desktop\\cn-ai-monitor\\paper-monitor\\data\\processed\\review_candidates_2026-05-21.json",
+  "summary_path": "C:\\Users\\HP\\Desktop\\cn-ai-monitor\\paper-monitor\\data\\processed\\classification_summary_2026-05-21.json",
+  "thresholds": {
+    "min_ai_score": 3,
+    "min_significance_score": 8,
+    "requires_core_ai_digest_signal": true
+  },
+  "counts": {
+    "raw_records": 200,
+    "classified_records": 200,
+    "core_ai_digest_signal": 159,
+    "china_affiliated": 22,
+    "china_strong": 2,
+    "china_review": 20,
+    "selected": 1,
+    "review_candidates": 20,
+    "needs_review": 20
+  },
+  "validation_aliases_loaded": {
+    "yaml_available": true,
+    "validation_path": "C:\\Users\\HP\\Desktop\\cn-ai-monitor\\paper-monitor\\tests\\validation_set.yaml",
+    "institution_aliases": 29,
+    "model_aliases": 195
+  }
+}

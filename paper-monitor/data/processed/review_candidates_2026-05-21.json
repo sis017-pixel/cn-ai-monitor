@@ -1,0 +1,1393 @@
+[
+  {
+    "title": "ArPoMeme: An Annotated Arabic Multimodal Dataset for Political Ideology and Polarization",
+    "source": "arXiv",
+    "arxiv_id": "2605.20967v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.20967v1",
+    "published": "2026-05-20T09:53:01Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Qwen",
+      "Qwen2.5-VL",
+      "Qwen2.5"
+    ],
+    "ai_relevance_score": 8,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=3",
+      "ai_keyword_in_title"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 16,
+    "significance_reasons": [
+      "ai_relevance=8",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=3",
+      "frontier_in_title"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "ArPoMeme: An Annotated Arabic Multimodal Dataset for Political Ideology and Polarization",
+      "authors": [
+        "Wajdi Zaghouani",
+        "Kais Attia",
+        "Md. Rafiul Biswas",
+        "Fadhl Eryani"
+      ],
+      "summary": "Memes have become a prominent medium of political communication in the Arab world, reflecting how humor, imagery, and text interact to express ideological and cultural positions. Despite the centrality of memes to online political discourse, there is a lack of systematically curated resources for analyzing their multimodal and ideological dimensions in Arabic. This paper presents ArPoMeme, a large-scale dataset of approximately 7,300 Arabic political memes categorized by ideological orientation, including Leftist, Islamist, Pan-Arabist, and Satirical perspectives. The dataset captures the diversity of Arabic meme ecosystems by grounding classification in the self-identification of public Facebook pages and groups that produce and disseminate these memes. To ensure both scale and accuracy, we designed a semi-automated data collection pipeline combining Playwright-based Facebook scraping with Google Drive synchronization, followed by text extraction using the Qwen2.5-VL-7B vision language model. The extracted text was manually verified and annotated for three polarization dimensions: Us vs. Them framing, Hostility toward out-groups, and Calls to action. Annotation was conducted through a custom Streamlit-based interface supporting distributed labeling, real-time tracking, and version control. The resulting dataset links visual content, textual messages, and ideological orientation, enabling fine-grained analysis of political antagonism, mobilization, and humor. Quantitative analysis of the annotated corpus reveals strong asymmetries in antagonistic framing across ideological groups, with Islamist and satirical memes exhibiting the highest levels of hostility and mobilization cues. The dataset and the annotation tool offers a reproducible and publicly available resource for studying Arabic political discourse, multimodal ideology detection, and polarization dynamics.",
+      "published": "2026-05-20T09:53:01Z",
+      "updated": "2026-05-20T09:53:01Z",
+      "arxiv_id": "2605.20967v1",
+      "url": "http://arxiv.org/abs/2605.20967v1",
+      "categories": [
+        "cs.CL"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "LASH: Adaptive Semantic Hybridization for Black-Box Jailbreaking of Large Language Models",
+    "source": "arXiv",
+    "arxiv_id": "2605.21362v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21362v1",
+    "published": "2026-05-20T16:27:00Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "ambiguous_model_alias_needs_review"
+    ],
+    "china_match_terms": [
+      "Seed"
+    ],
+    "ai_relevance_score": 7,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=2",
+      "ai_keyword_in_title"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 15,
+    "significance_reasons": [
+      "ai_relevance=7",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=3",
+      "frontier_in_title"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "LASH: Adaptive Semantic Hybridization for Black-Box Jailbreaking of Large Language Models",
+      "authors": [
+        "Abdullah Al Nomaan Nafi",
+        "Fnu Suya",
+        "Swarup Bhunia",
+        "Prabuddha Chakraborty"
+      ],
+      "summary": "Jailbreak attacks expose a persistent gap between the intended safety behavior of aligned large language models and their behavior under adversarial prompting. Existing automated methods are increasingly effective but each commits to a single attack family (e.g., one refinement loop, one tree search, one mutation space, or one strategy library) and no single family dominates: the best-performing method shifts across target models and harm categories, suggesting complementary strengths that per-prompt composition could exploit. We introduce LASH (LLM Adaptive Semantic Hybridization), a black-box framework that treats outputs from multiple base attacks as reusable seed prompts and adaptively composes them for each target request. Given a seed pool, LASH searches over seed subsets and softmax-normalized mixture weights; a composition module synthesizes a single candidate prompt, and a derivative-free genetic optimizer updates the weights using black-box target feedback and a two-stage fitness function combining keyword-based refusal detection with LLM-judge scoring. On JailbreakBench, which contains 100 harmful prompts across 10 categories, we evaluate LASH on six common target models. LASH achieves an average attack success rate of 84.5% under keyword-based evaluation and 74.5% under two-stage evaluation, where responses are first filtered for refusals and then scored by an LLM judge for whether they substantively fulfill the original harmful request. LASH outperforms five state-of-the-art baselines on both metrics with only 30 mean target queries. LASH also remains competitive under three defense mechanisms and induces more success-like internal representations. These results suggest that adaptive composition across heterogeneous jailbreak strategies is a promising direction for black-box red-teaming.",
+      "published": "2026-05-20T16:27:00Z",
+      "updated": "2026-05-20T16:27:00Z",
+      "arxiv_id": "2605.21362v1",
+      "url": "http://arxiv.org/abs/2605.21362v1",
+      "categories": [
+        "cs.CL"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Dynamic Video Generation: Shaping Video Generation Across Time and Space",
+    "source": "arXiv",
+    "arxiv_id": "2605.21042v1",
+    "openalex_id": null,
+    "openalex_title": "The<i>Gaia</i>mission",
+    "openalex_match_score": 0.1319,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21042v1",
+    "published": "2026-05-20T11:24:02Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias"
+    ],
+    "china_match_terms": [
+      "Hunyuan"
+    ],
+    "ai_relevance_score": 7,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=2",
+      "ai_keyword_in_title"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 14,
+    "significance_reasons": [
+      "ai_relevance=7",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2",
+      "frontier_in_title"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Dynamic Video Generation: Shaping Video Generation Across Time and Space",
+      "authors": [
+        "Shikang Zheng",
+        "Jingkai Huang",
+        "Jiacheng Liu",
+        "Guantao Chen",
+        "Lixuan",
+        "Yuqi Lin",
+        "Peiliang Cai",
+        "Linfeng Zhang"
+      ],
+      "summary": "Diffusion models have achieved impressive performance in video generation, but their iterative denoising process remains computationally expensive due to the large number of tokens processed at each timestep. Recently, progressive resolution sampling has emerged as a promising acceleration approach by reducing latent resolution in early stages. However, scaling this idea to video generation remains challenging, as the additional temporal dimension introduces diverse spatio-temporal demands across different videos, and compressing only a single dimension often leads to limited acceleration or degraded quality. Therefore, we propose DVG, a Dynamic Video Generation framework that jointly allocates computation across time and space, automatically selecting content-aware acceleration strategies without manual tuning or retraining. DVG achieves near-lossless acceleration across models and tasks, reaching up to 7 times speedup on HunyuanVideo and HunyuanVideo-1.5, and 18 times when combined with distillation, demonstrating its potential as a key component in today's large-scale efficient video generation systems. Our code is in supplementary material and will be released on Github.",
+      "published": "2026-05-20T11:24:02Z",
+      "updated": "2026-05-20T11:24:02Z",
+      "arxiv_id": "2605.21042v1",
+      "url": "http://arxiv.org/abs/2605.21042v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "The<i>Gaia</i>mission",
+      "openalex_doi": "10.1051/0004-6361/201629272",
+      "openalex_match_score": 0.1319,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "OcclusionFormer: Arranging Z-Order for Layout-Grounded Image Generation",
+    "source": "arXiv",
+    "arxiv_id": "2605.21343v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21343v1",
+    "published": "2026-05-20T16:10:44Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Vidu"
+    ],
+    "ai_relevance_score": 9,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=5",
+      "ai_keyword_in_title"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 13,
+    "significance_reasons": [
+      "ai_relevance=9",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=1"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "OcclusionFormer: Arranging Z-Order for Layout-Grounded Image Generation",
+      "authors": [
+        "Ziye Li",
+        "Henghui Ding"
+      ],
+      "summary": "Recent layout-to-image models have achieved remarkable progress in spatial controllability. However, they still struggle with inter-object occlusion. When bounding boxes overlap, most existing methods lack explicit occlusion information, which makes the generation in intersection regions inherently ambiguous and hinders the determination of complex occlusion relationships. As a result, they often produce entangled textures or physically inconsistent layering in the overlapped areas. To address this issue, we first construct SA-Z, a large-scale dataset enriched with explicit occlusion ordering and pixel-level annotations. Building upon our proposed dataset, we introduce OcclusionFormer, a novel occlusion-aware Diffusion Transformer framework that explicitly models Z-order priority by decoupling instances and compositing them via volume rendering. Furthermore, to ensure fine-grained spatial precision, we introduce a queried alignment loss that explicitly supervises individual instances and enhances semantic consistency. The proposed method effectively reduces ambiguity in overlapping regions, enforces correct occlusion dependencies, and preserves structural integrity, leading to substantial accuracy gains across diverse scenes.",
+      "published": "2026-05-20T16:10:44Z",
+      "updated": "2026-05-20T16:10:44Z",
+      "arxiv_id": "2605.21343v1",
+      "url": "http://arxiv.org/abs/2605.21343v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Insights Generator: Systematic Corpus-Level Trace Diagnostics for LLM Agents",
+    "source": "arXiv",
+    "arxiv_id": "2605.21347v1",
+    "openalex_id": null,
+    "openalex_title": "A Survey of Reasoning with Foundation Models",
+    "openalex_match_score": 0.2353,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21347v1",
+    "published": "2026-05-20T16:13:53Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Vidu"
+    ],
+    "ai_relevance_score": 7,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=2",
+      "ai_keyword_in_title"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 13,
+    "significance_reasons": [
+      "ai_relevance=7",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=1",
+      "frontier_in_title"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Insights Generator: Systematic Corpus-Level Trace Diagnostics for LLM Agents",
+      "authors": [
+        "Akshay Manglik",
+        "Apaar Shanker",
+        "Kaustubh Deshpande",
+        "Jason Qin",
+        "Yash Maurya",
+        "Veronica Chatrath",
+        "Vijay S. Kalmath",
+        "Levi Lentz",
+        "Yuan",
+        "Xue"
+      ],
+      "summary": "Diagnosing failures in LLM agents remains largely manual. Practitioners inspect a small subset of execution traces, form ad-hoc hypotheses, and iterate. This process misses patterns that only emerge across trace populations and does not scale to production corpora where individual traces span tens of thousands of tokens. We formalize the problem of corpus-level trace diagnostics. Given a corpus of execution traces, the goal is to produce grounded natural-language insights that characterize systematic behavioral patterns across trace groups, each linked to supporting evidence. We present the Insights Generator (IG), a multi-agent system that answers diagnostic questions by proposing and testing hypotheses across the trace corpus to produce an evidence-backed insights report. We evaluate IG across qualitative and objective dimensions, spanning rubric-based report assessment and downstream performance improvements achieved by implementing IG insights. Human experts using IG reports improve scaffold performance by 30.4pp over the unmodified baseline scaffold, and coding agents leveraging IG-derived insights show consistent and stable gains. Across benchmarks, IG's scout-investigator architecture produces findings comparable in detection coverage to competing approaches, while domain experts rated IG reports as leading depth and evidence quality.",
+      "published": "2026-05-20T16:13:53Z",
+      "updated": "2026-05-20T16:13:53Z",
+      "arxiv_id": "2605.21347v1",
+      "url": "http://arxiv.org/abs/2605.21347v1",
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.SE"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "A Survey of Reasoning with Foundation Models",
+      "openalex_doi": "10.31219/osf.io/ac4sp",
+      "openalex_match_score": 0.2353,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "DelTA: Discriminative Token Credit Assignment for Reinforcement Learning from Verifiable Rewards",
+    "source": "arXiv",
+    "arxiv_id": "2605.21467v1",
+    "openalex_id": null,
+    "openalex_title": "Good Teachers, Better Students: A Survey of Reward Models for LLM",
+    "openalex_match_score": 0.2911,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21467v1",
+    "published": "2026-05-20T17:53:09Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Qwen",
+      "Qwen3"
+    ],
+    "ai_relevance_score": 7,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=2",
+      "ai_keyword_in_title"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 12,
+    "significance_reasons": [
+      "ai_relevance=7",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "DelTA: Discriminative Token Credit Assignment for Reinforcement Learning from Verifiable Rewards",
+      "authors": [
+        "Kaiyi Zhang",
+        "Wei Wu",
+        "Yankai Lin"
+      ],
+      "summary": "Reinforcement learning from verifiable rewards (RLVR) has emerged as a central technique for improving the reasoning capabilities of large language models. Despite its effectiveness, how response-level rewards translate into token-level probability changes remains poorly understood. We introduce a discriminator view of RLVR updates, showing that the policy-gradient update direction implicitly acts as a linear discriminator over token-gradient vectors and thereby determines which token probabilities are increased or decreased during learning. Under standard sequence-level RLVR, this discriminator is constructed from positive- and negative-side centroids formed by advantage-weighted averaging of token-gradient vectors. However, such centroid construction can be dominated by shared high-frequency patterns, such as formatting tokens, diluting sparse yet discriminative directions that better distinguish high-reward responses from low-reward ones. To address this limitation, we propose $\\textbf{DelTA}$, a discriminative token credit assignment method that estimates token coefficients to amplify side-specific token-gradient directions and downweight shared or weakly discriminative ones. These coefficients reweight a self-normalized RLVR surrogate, making the effective side-wise centroids more contrastive and thereby reshaping the RLVR update direction. On seven mathematical benchmarks, DelTA outperforms the strongest same-scale baselines by 3.26 and 2.62 average points on Qwen3-8B-Base and Qwen3-14B-Base, respectively. Additional results on code generation, a different backbone, and out-of-domain evaluations further demonstrate the generalization ability of DelTA.",
+      "published": "2026-05-20T17:53:09Z",
+      "updated": "2026-05-20T17:53:09Z",
+      "arxiv_id": "2605.21467v1",
+      "url": "http://arxiv.org/abs/2605.21467v1",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "Good Teachers, Better Students: A Survey of Reward Models for LLM",
+      "openalex_doi": "10.36227/techrxiv.176689979.98790639/v1",
+      "openalex_match_score": 0.2911,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "APM: Evaluating Style Personalization in LLMs with Arbitrary Preference Mappings",
+    "source": "arXiv",
+    "arxiv_id": "2605.21063v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21063v1",
+    "published": "2026-05-20T11:47:40Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Qwen"
+    ],
+    "ai_relevance_score": 7,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=4"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 12,
+    "significance_reasons": [
+      "ai_relevance=7",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "APM: Evaluating Style Personalization in LLMs with Arbitrary Preference Mappings",
+      "authors": [
+        "Philipp Spohn",
+        "Leander Girrbach",
+        "Zeynep Akata"
+      ],
+      "summary": "Typical LLM responses tend to follow a default style, even though users often have distinct preferences regarding tone, verbosity, and formality that they do not explicitly state in their prompts. Evaluating whether personalization methods can adapt to these implicit preferences is challenging, since users typically provide prompts rather than reference responses, style preferences are not factually verifiable, and reference-free LLM judges may conflate personalization with general response quality. To address these challenges, we introduce the Arbitrary Preference Mapping (APM) benchmark, which decouples user attributes (e.g. enthusiastic) from response principles (e.g. persuasive) via a hidden, randomized mapping $\\mathbf{C}$ that maps user attributes to preferences about response traits. Because $\\mathbf{C}$ carries no semantic content and is resampled across runs, models cannot exploit stereotypical associations and must infer preferences from conversation history. Using this unbiased evaluation methodology, we adapt retrieval-augmented, prompt-optimization, and routing personalization methods and evaluate them on Llama-3.1-8B and Qwen-3.5-27B. Our results show that routing is the most reliable approach, while RAG only improves with the stronger base LLM, and soft prompt optimization fails to improve significantly over a non-personalized baseline. Our extensive evaluation reveals that in this realistic setting, personalization remains challenging, but our adapted methods show promise.",
+      "published": "2026-05-20T11:47:40Z",
+      "updated": "2026-05-20T11:47:40Z",
+      "arxiv_id": "2605.21063v1",
+      "url": "http://arxiv.org/abs/2605.21063v1",
+      "categories": [
+        "cs.CL"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "LamPO: A Lambda Style Policy Optimization for Reasoning Language Models",
+    "source": "arXiv",
+    "arxiv_id": "2605.21235v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21235v1",
+    "published": "2026-05-20T14:24:11Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Qwen",
+      "Qwen3"
+    ],
+    "ai_relevance_score": 5,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=2"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 11,
+    "significance_reasons": [
+      "ai_relevance=5",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=1",
+      "frontier_in_title"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "LamPO: A Lambda Style Policy Optimization for Reasoning Language Models",
+      "authors": [
+        "Zhe Yuan",
+        "Yipeng Zhou",
+        "Jinghan Li",
+        "Xinyuan Chen",
+        "Bowen Deng",
+        "Zhiqian Chen",
+        "Liang Zhao"
+      ],
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) has become an effective paradigm for improving reasoning language models on tasks such as mathematics, coding, and scientific question answering. However, widely used group-relative objectives, such as GRPO, summarize each sampled group with scalar statistics and therefore discard fine-grained relational information among candidate responses. This weakens credit assignment under sparse outcome rewards, especially when multiple generated solutions differ only subtly in reasoning quality. We propose \\textbf{LamPO}, a \\textbf{Lambda-Style Policy Optimization} method that replaces scalar group advantages with a \\emph{Pairwise Decomposed Advantage}. LamPO aggregates pairwise reward gaps within each response group and modulates each comparison by a confidence-aware weight computed from sequence log-probability differences, while retaining the critic-free and clipped-update structure of PPO-style optimization. When reference solutions are available, we further add a lightweight ROUGE-L-based dense auxiliary reward to reduce reward sparsity. Experiments on AIME24, AIME25, MATH-500, and GPQA-Diamond with Qwen3-1.7B, Qwen3-4B, and Phi-4-mini show that LamPO consistently improves over GRPO and recent RLVR variants, with more stable training dynamics and better sample efficiency.",
+      "published": "2026-05-20T14:24:11Z",
+      "updated": "2026-05-20T14:24:11Z",
+      "arxiv_id": "2605.21235v1",
+      "url": "http://arxiv.org/abs/2605.21235v1",
+      "categories": [
+        "cs.CL"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "You Only Need Minimal RLVR Training: Extrapolating LLMs via Rank-1 Trajectories",
+    "source": "arXiv",
+    "arxiv_id": "2605.21468v1",
+    "openalex_id": null,
+    "openalex_title": "A Survey of Large Language Models",
+    "openalex_match_score": 0.1622,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21468v1",
+    "published": "2026-05-20T17:53:20Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Qwen",
+      "Qwen3",
+      "Qwen2.5"
+    ],
+    "ai_relevance_score": 5,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=2"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 10,
+    "significance_reasons": [
+      "ai_relevance=5",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "You Only Need Minimal RLVR Training: Extrapolating LLMs via Rank-1 Trajectories",
+      "authors": [
+        "Zhepei Wei",
+        "Xinyu Zhu",
+        "Wei-Lin Chen",
+        "Chengsong Huang",
+        "Jiaxin Huang",
+        "Yu Meng"
+      ],
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) has become a dominant paradigm for improving reasoning in large language models (LLMs), yet the underlying geometry of the resulting parameter trajectories remains underexplored. In this work, we demonstrate that RLVR weight trajectories are extremely low-rank and highly predictable. Specifically, we find that the majority of downstream performance gains are captured by a rank-1 approximation of the parameter deltas, where the magnitude of this projection evolves near-linearly with training steps. Motivated by this, we propose a simple and compute-efficient method RELEX (REinforcement Learning EXtrapolation), which estimates the rank-1 subspace from a short observation window and extrapolates future checkpoints via linear regression, with no learned model required. Across three models (i.e., Qwen2.5-Math-1.5B, Qwen3-4B-Base, and Qwen3-8B-Base), RELEX produces checkpoints that match or exceed RLVR performance on both in-domain and out-of-domain benchmarks, requiring as few as 15% steps of full RLVR training. Remarkably, RELEX is able to extrapolate far beyond the observation window at no training cost, predicting checkpoints up to 10-20$\\times$ beyond the observed prefix with continued improvement (e.g., observe only the first 50 steps and extrapolate to 1000 steps). Our ablation analysis confirms the minimalist sufficiency of RELEX: neither increasing the subspace rank nor employing non-linear modeling yields further gains in extrapolation. Finally, we show that RELEX's success stems from a \"denoising\" effect: by projecting updates onto the rank-1 subspace, the model discards stochastic optimization noise that would otherwise degrade performance during extrapolation. Our code is available at https://github.com/weizhepei/RELEX.",
+      "published": "2026-05-20T17:53:20Z",
+      "updated": "2026-05-20T17:53:20Z",
+      "arxiv_id": "2605.21468v1",
+      "url": "http://arxiv.org/abs/2605.21468v1",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "A Survey of Large Language Models",
+      "openalex_doi": "10.1007/s11704-026-60308-3",
+      "openalex_match_score": 0.1622,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "How Much Online RL is Enough? Informative Rollouts for Offline Preference Optimization in RLVR",
+    "source": "arXiv",
+    "arxiv_id": "2605.21266v1",
+    "openalex_id": null,
+    "openalex_title": "Reward Modeling from Natural Language Human Feedback",
+    "openalex_match_score": 0.2345,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21266v1",
+    "published": "2026-05-20T14:53:43Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Qwen",
+      "Qwen2.5"
+    ],
+    "ai_relevance_score": 5,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=2"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 10,
+    "significance_reasons": [
+      "ai_relevance=5",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "How Much Online RL is Enough? Informative Rollouts for Offline Preference Optimization in RLVR",
+      "authors": [
+        "Richa Verma",
+        "Balaraman Ravindran"
+      ],
+      "summary": "Reinforcement Learning from Verifiable Rewards (RLVR) has emerged as a powerful paradigm for reasoning in language models, with GRPO as its primary example. However, GRPO requires continuous online rollout generation, making it computationally expensive and difficult to scale. While Direct Preference Optimization (DPO) offers a stable and efficient offline alternative, it is typically expected to underperform w.r.t. online RL methods such as GRPO when trained on rollouts from a cold supervised fine-tuned (SFT) policy. We introduce G2D (GRPO to DPO)}, a three-stage pipeline that performs a short GRPO warm-up, constructs a static preference dataset, and fine-tunes a model offline with DPO. Across a set of values of the number of online steps (K) in GRPO on Qwen2.5-7B and Llama-3.1-8B, we find that offline DPO with moderate warm-up matches or outperforms GRPO at substantially lower compute cost in our setting. On Qwen2.5-7B, G2D at K=150 achieves 62.4% on MATH-500, outperforming GRPO (51.6%) by 10.8% at ~4x lower compute. On Llama-3.1-8B, G2D at K=500 achieves 49.4%, surpassing GRPO in our experimental setting. We show that performance is not governed by the number of preference pairs, which does not vary much w.r.t. K, but by their informativeness. Moderate warm-up produces rollouts with calibrated uncertainty, yielding stronger contrastive signal, while excessive warm-up leads to overconfident policies and less informative data. Our results recast the offline-online gap in RLVR as primarily a data informativeness problem, and identify short online RL warm-up with appropriate difficulty calibration of the fine-tuning dataset as a compute-efficient alternative to online RL.",
+      "published": "2026-05-20T14:53:43Z",
+      "updated": "2026-05-20T14:53:43Z",
+      "arxiv_id": "2605.21266v1",
+      "url": "http://arxiv.org/abs/2605.21266v1",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "Reward Modeling from Natural Language Human Feedback",
+      "openalex_doi": null,
+      "openalex_match_score": 0.2345,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Divide and Contrast: Learning Robust Temporal Features without Augmentation",
+    "source": "arXiv",
+    "arxiv_id": "2605.21241v1",
+    "openalex_id": null,
+    "openalex_title": "A Survey of Convolutional Neural Networks: Analysis, Applications, and Prospects",
+    "openalex_match_score": 0.1589,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21241v1",
+    "published": "2026-05-20T14:31:44Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Vidu"
+    ],
+    "ai_relevance_score": 4,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=1"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 9,
+    "significance_reasons": [
+      "ai_relevance=4",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Divide and Contrast: Learning Robust Temporal Features without Augmentation",
+      "authors": [
+        "Abdul-Kazeem Shamba",
+        "Kerstin Bach",
+        "Gavin Taylor"
+      ],
+      "summary": "Self-supervised learning for time-series representation aims to reduce reliance on labeled data while maintaining strong downstream performance, yet many existing approaches incur high computational costs or rely on assumptions that do not hold across diverse temporal dynamics. In this work, we introduce Divide and Contrast (Di-COT), an unsupervised framework that avoids data augmentation and multiple encoder passes by contrasting informative substructures within a window rather than individual timesteps. Di-COT stochastically partitions each window into a small number of overlapping sub-blocks per iteration, enabling efficient and meaningful contrast while mitigating false positives during temporal transitions. To further improve scalability, we adopt a contrastive objective whose computation depends on the batch size and the number of sub-blocks, making loss computation independent of sequence length. Extensive experiments on six large-scale real-world datasets, as well as the UCR and UEA benchmarks, demonstrate that Di-COT learns semantically structured and transferable representations, achieving state-of-the-art performance on classification, clustering, $k$NN, and cross-dataset transfer, while substantially reducing training time. The source code is publicly available at https://github.com/sfi-norwai/Di-COT.",
+      "published": "2026-05-20T14:31:44Z",
+      "updated": "2026-05-20T14:31:44Z",
+      "arxiv_id": "2605.21241v1",
+      "url": "http://arxiv.org/abs/2605.21241v1",
+      "categories": [
+        "cs.LG"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "A Survey of Convolutional Neural Networks: Analysis, Applications, and Prospects",
+      "openalex_doi": "10.1109/tnnls.2021.3084827",
+      "openalex_match_score": 0.1589,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Diagnosing Overhead in Dispatch Operations: Cross-architecture Observatory",
+    "source": "arXiv",
+    "arxiv_id": "2605.20982v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.20982v1",
+    "published": "2026-05-20T10:14:00Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "DeepSeek",
+      "Qwen",
+      "Qwen3"
+    ],
+    "ai_relevance_score": 4,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=1"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 9,
+    "significance_reasons": [
+      "ai_relevance=4",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Diagnosing Overhead in Dispatch Operations: Cross-architecture Observatory",
+      "authors": [
+        "Bole Ma",
+        "Jan Eitzinger",
+        "Harald Koestler",
+        "Gerhard Wellein"
+      ],
+      "summary": "AlltoAll dispatch is the dominant bottleneck of MoE expert parallelism, and the interconnect community has responded with four families of mitigations: predictive sample placement, adaptive expert relayout, hierarchical collectives, and EP-aware topology. All four rest on two assumptions about the workload. The first is that routing imbalance is correctable by the system layer. The second is that the mock-token benchmarks evaluating them faithfully represent production routing. We introduce DODOCO to test both assumptions. We instrument five MoE checkpoints spanning five sequence-mixer designs (DeepSeek-V2-Lite MLA, DeepSeek-MoE-16B MHA, Qwen3-30B GQA, Nemotron-30B Mamba-2, Qwen3.5-35B GDN) under a 5 by 6 grid of data conditions plus a matched EP scan from 4 to 32 ranks on H100s; both assumptions fail. Scaling EP changes the per-expert max/mean token ratio by at most 5% within every architecture's measurable range: the straggler is intrinsic to the routing decision the model makes, not to how its experts land on ranks. Mock tokens overestimate routing Gini by up to a factor of 2.35 and fabricate a batch-size scaling trend that vanishes the moment real text replaces random IDs. A third pattern, unexpected, emerges from the same matrix: the five architectures cleave into two stable bands. MHA and Mamba-2 (data-resilient) drop to Gini 0.105 and 0.150 on wikitext. MLA and GDN (persistently concentrated) stay above 0.24 on every real-text condition and reach 0.29 to 0.38 on mock. GQA is the intermediate case. These bands, not the EP degree or the mock-data profile, are the right workload input to AlltoAll-aware interconnect and dispatch design.",
+      "published": "2026-05-20T10:14:00Z",
+      "updated": "2026-05-20T10:14:00Z",
+      "arxiv_id": "2605.20982v1",
+      "url": "http://arxiv.org/abs/2605.20982v1",
+      "categories": [
+        "cs.DC",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Ordering Matters: Rank-Aware Selective Fusion for Blended Emotion Recognition",
+    "source": "arXiv",
+    "arxiv_id": "2605.21417v1",
+    "openalex_id": null,
+    "openalex_title": "A Survey of Deep Learning-Based Multimodal Emotion Recognition: Speech, Text, and Face",
+    "openalex_match_score": 0.4528,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21417v1",
+    "published": "2026-05-20T17:12:55Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Vidu"
+    ],
+    "ai_relevance_score": 4,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=1"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 8,
+    "significance_reasons": [
+      "ai_relevance=4",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=1"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Ordering Matters: Rank-Aware Selective Fusion for Blended Emotion Recognition",
+      "authors": [
+        "Junghyun Lee",
+        "Hyunseo Kim",
+        "Hanna Jang",
+        "Junhyug Noh"
+      ],
+      "summary": "Blended emotion recognition is challenging because emotions are often expressed as mixtures of subtle and overlapping multimodal cues rather than a single dominant signal. We propose a rank-aware multi-encoder framework that selectively combines complementary representations from diverse pre-extracted video and audio encoders. Our method projects heterogeneous encoder features into a shared latent space, estimates sample-wise encoder importance through an attention-based gating module, and fuses only the top-n most informative encoders. To better model blended emotions, we decouple prediction into presence and salience heads and align them through probability-level fusion. We further incorporate feature-level unsupervised domain adaptation without pseudo-labeling to improve robustness under distribution shift. Experiments on the BlEmoRE challenge show that the proposed framework outperforms strong individual encoders and naïve multi-encoder fusion baselines. Our final system ranked 2nd in the competition, supporting the effectiveness of rank-aware selective fusion for fine-grained blended emotion recognition.",
+      "published": "2026-05-20T17:12:55Z",
+      "updated": "2026-05-20T17:12:55Z",
+      "arxiv_id": "2605.21417v1",
+      "url": "http://arxiv.org/abs/2605.21417v1",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "A Survey of Deep Learning-Based Multimodal Emotion Recognition: Speech, Text, and Face",
+      "openalex_doi": "10.3390/e25101440",
+      "openalex_match_score": 0.4528,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Fast and Stable Triangular Inversion for Delta-Rule Linear Transformers",
+    "source": "arXiv",
+    "arxiv_id": "2605.21325v1",
+    "openalex_id": null,
+    "openalex_title": "A Comprehensive Review on Grid Connected Photovoltaic Inverters, Their Modulation Techniques, and Control Strategies",
+    "openalex_match_score": 0.2919,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21325v1",
+    "published": "2026-05-20T15:51:32Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Qwen",
+      "Kimi",
+      "Qwen3"
+    ],
+    "ai_relevance_score": 3,
+    "ai_relevance_reasons": [
+      "ai_category"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 8,
+    "significance_reasons": [
+      "ai_relevance=3",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=2"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Fast and Stable Triangular Inversion for Delta-Rule Linear Transformers",
+      "authors": [
+        "Aleksandros Sobczyk",
+        "Gioele Gottardo",
+        "Christos K. Matzoros",
+        "Mirko De Vita",
+        "Filip Skogh",
+        "Anastasios Zouzias",
+        "Jiawei Zhuang"
+      ],
+      "summary": "Linear attention has emerged as a cornerstone for efficient long-context architectures, as evidenced by its integration into state-of-the-art open-source models including Qwen3.5/3.6, Kimi Linear, and RWKV-7. Models that incorporate linear attention layers with the so-called Delta-Rule involve the inversion of triangular matrices as a core sub-routine. This operation often forms a performance bottleneck, and, due to its high-sensitivity to numerical errors, it can significantly deteriorate end-to-end model accuracy if it is not carefully implemented. This work provides a systematic analysis of both direct and iterative triangular inversion algorithms, targeting methods that are rich in matrix products, and, therefore, have the potential to efficiently utilize modern hardware. To that end, our analysis covers a broad spectrum of mathematical and practical aspects, with a heavy focus on numerical stability, computational complexity, and, ultimately, hardware efficiency and practical considerations. We provide a rigorous experimental evaluation to verify these properties in practical scenarios, and in low-precision floating-point representations, highlighting the strengths and limitations of each method. Performance benchmarks on NPUs reveal up to $4.3\\times$ speed-up against the state-of-the-art implementations of SGLang for triangular matrix inversion, leading to significant performance improvements on the entire layer level, while maintaining full end-to-end model accuracy.",
+      "published": "2026-05-20T15:51:32Z",
+      "updated": "2026-05-20T15:51:32Z",
+      "arxiv_id": "2605.21325v1",
+      "url": "http://arxiv.org/abs/2605.21325v1",
+      "categories": [
+        "cs.LG"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "A Comprehensive Review on Grid Connected Photovoltaic Inverters, Their Modulation Techniques, and Control Strategies",
+      "openalex_doi": "10.3390/en13164185",
+      "openalex_match_score": 0.2919,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Theoretical guidelines for annealed Langevin dynamics in compositional simulation-based inference",
+    "source": "arXiv",
+    "arxiv_id": "2605.21253v1",
+    "openalex_id": null,
+    "openalex_title": "Photovoltaics and Energy Storage Integrated Flexible Direct Current Distribution Systems of Buildings: Definition, Technology Review, and Application",
+    "openalex_match_score": 0.2387,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21253v1",
+    "published": "2026-05-20T14:41:29Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Vidu"
+    ],
+    "ai_relevance_score": 4,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=1"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 7,
+    "significance_reasons": [
+      "ai_relevance=4",
+      "china_review",
+      "has_arxiv_id"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Theoretical guidelines for annealed Langevin dynamics in compositional simulation-based inference",
+      "authors": [
+        "Camille Touron",
+        "Gabriel V. Cardoso",
+        "Julyan Arbel",
+        "Pedro L. C. Rodrigues"
+      ],
+      "summary": "Compositional score-based approaches to simulation-based inference (SBI) approximate the posterior over a shared parameter given $n$ independent observations by aggregating individually learned posterior scores: currently, there are two main propositions of such methods (Geffner et al. (2023), Linhart et al. (2026)). As the resulting composite score does not correspond to the score of any distribution along the forward diffusion path of the true multi-observation posterior, sampling from it via a reverse SDE leads to an irreducible bias. Annealed Langevin dynamics provides a principled alternative: it treats the composite score as the genuine score of a sequence of tractable bridging densities and samples from them in succession. When properly tuned, it could lead to a controllable bias. However, its hyperparameters, namely step sizes, the number of steps per level, and the number of annealing levels, have so far been chosen empirically. We derive Wasserstein bounds for annealed Langevin with approximate scores and translate them into explicit decision rules for these hyperparameters that guarantee a prescribed sampling accuracy, while highlighting different theoretical aspects of each composite score formulation. In the Gaussian setting, we obtain closed-form expressions for all relevant quantities and prove that the bridging densities of Linhart et al. (2026) consistently admit larger step sizes and require fewer total Langevin steps than those of Geffner et al. (2023). Furthermore, we show empirically that the tuning obtained in the Gaussian setting generalizes to more complex problems, thus providing a well-understood and theoretically grounded starting point for practitioners using compositional score-based approaches.",
+      "published": "2026-05-20T14:41:29Z",
+      "updated": "2026-05-20T14:41:29Z",
+      "arxiv_id": "2605.21253v1",
+      "url": "http://arxiv.org/abs/2605.21253v1",
+      "categories": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "Photovoltaics and Energy Storage Integrated Flexible Direct Current Distribution Systems of Buildings: Definition, Technology Review, and Application",
+      "openalex_doi": "10.17775/cseejpes.2022.04850",
+      "openalex_match_score": 0.2387,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Efficient Banzhaf-Based Data Valuation for $k$-Nearest Neighbors Classification",
+    "source": "arXiv",
+    "arxiv_id": "2605.21033v1",
+    "openalex_id": null,
+    "openalex_title": "From Points to Coalitions: Hierarchical Contrastive Shapley Values for Prioritizing Data Samples",
+    "openalex_match_score": 0.2326,
+    "openalex_match_method": "rejected_title_mismatch",
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21033v1",
+    "published": "2026-05-20T11:10:15Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Vidu"
+    ],
+    "ai_relevance_score": 4,
+    "ai_relevance_reasons": [
+      "ai_category",
+      "ai_keywords=1"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 7,
+    "significance_reasons": [
+      "ai_relevance=4",
+      "china_review",
+      "has_arxiv_id"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Efficient Banzhaf-Based Data Valuation for $k$-Nearest Neighbors Classification",
+      "authors": [
+        "Guangyi Zhang",
+        "Lutz Oettershagen",
+        "Lixu Wang",
+        "Aristides Gionis"
+      ],
+      "summary": "Data valuation, the task of quantifying the contribution of individual data points to model performance, has emerged as a fundamental challenge in machine learning. Game-theoretic approaches, such as the Banzhaf value, offer principled frameworks for fair data valuation; however, they suffer from exponential computational complexity. We address this challenge by developing efficient algorithms specifically tailored for computing Banzhaf values in $k$-nearest neighbor ($k$NN) classifiers. We first establish the theoretical hardness of the problem by proving that it is \\#P-hard. Despite this intractability, we exploit the locality properties of $k$NN classifiers to develop practical exact algorithms. Our main contribution is a dynamic programming framework that achieves significant computational improvements: we present a pseudo-polynomial algorithm with $O(Wkn^2)$ time complexity for weighted $k$NN classifiers, where $W$ is the maximum sum of top-$k$ weights, and a specialized algorithm for unweighted $k$NN that achieves $O(nk^2)$ time complexity, that is, linear in the number of data points. We also offer efficient Monte Carlo estimation methods. Extensive experiments on real-world datasets demonstrate the practical efficiency of our approach and its effectiveness in data valuation applications.",
+      "published": "2026-05-20T11:10:15Z",
+      "updated": "2026-05-20T11:10:15Z",
+      "arxiv_id": "2605.21033v1",
+      "url": "http://arxiv.org/abs/2605.21033v1",
+      "categories": [
+        "cs.LG",
+        "cs.DS"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": "From Points to Coalitions: Hierarchical Contrastive Shapley Values for Prioritizing Data Samples",
+      "openalex_doi": "10.1609/aaai.v40i19.38633",
+      "openalex_match_score": 0.2326,
+      "openalex_match_method": "rejected_title_mismatch",
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "How to Build Marcus's Algebraic Mind: Algebro-Deterministic Substrate over Galois Fields",
+    "source": "arXiv",
+    "arxiv_id": "2605.21379v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21379v1",
+    "published": "2026-05-20T16:40:27Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias",
+      "validation_model_alias"
+    ],
+    "china_match_terms": [
+      "Vidu",
+      "MOSS"
+    ],
+    "ai_relevance_score": 3,
+    "ai_relevance_reasons": [
+      "ai_category"
+    ],
+    "core_ai_digest_signal": false,
+    "significance_score": 7,
+    "significance_reasons": [
+      "ai_relevance=3",
+      "china_review",
+      "has_arxiv_id",
+      "frontier_terms=1"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "How to Build Marcus's Algebraic Mind: Algebro-Deterministic Substrate over Galois Fields",
+      "authors": [
+        "Hiroyuki Chuma",
+        "Kanji Otsuk",
+        "Yoichi Sato"
+      ],
+      "summary": "In The Algebraic Mind, Gary Marcus identified three components essential for any adequate cognitive architecture: operations over variables, recursively structured representations, and a distinction between mental representations of individuals and kinds. He argued that standard multilayer perceptrons supported none of these, acknowledging that a neural implementation using registers and treelets, constructed via developmental programs rather than gradient descent, remained a programmatic conjecture. Twenty-five years later, the required substrate is now available. Our newly developed PyVaCoAl/VaCoAl is a hyperdimensional computing architecture organized end-to-end around a single algebraic primitive: XOR-and-shift over GF(2), implemented by primitive-polynomial linear-feedback shift registers. The architecture supports reversible variable binding via Bind(R,F) = R XOR shift(F), non-commutative compositional bundling that distinguishes \"the dog bites the man\" from \"the man bites the dog,\" and address-space individual/kind separation under the same algebra. A companion perspective argues that the dentate gyrus-CA3 circuit is a biological homologue of this same engine, with developmentally specified mossy-fiber targeting supplying the innate microcircuitry Marcus anticipated. In this paper, we map the correspondence between Marcus's three pillars and the operational commitments of PyVaCoAl/VaCoAl. We reinterpret the treelet as an algebraic register set indexed by a primitive generator polynomial, arguing that this architecture provides a functional neural substrate meeting Marcus's specifications far more closely than the tensor products, circular convolution, or temporal synchrony available in 2001. We also demonstrate how this substrate naturally extends to Pearl's rung-3 counterfactual reasoning, a capability the original treelet program did not directly target.",
+      "published": "2026-05-20T16:40:27Z",
+      "updated": "2026-05-20T16:40:27Z",
+      "arxiv_id": "2605.21379v1",
+      "url": "http://arxiv.org/abs/2605.21379v1",
+      "categories": [
+        "cs.NE",
+        "cs.AI"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Stream3D: Sequential Multi-View 3D Generation via Evidential Memory",
+    "source": "arXiv",
+    "arxiv_id": "2605.21472v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21472v1",
+    "published": "2026-05-20T17:55:16Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "text_company_alias"
+    ],
+    "china_match_terms": [
+      "Hunyuan"
+    ],
+    "ai_relevance_score": 3,
+    "ai_relevance_reasons": [
+      "ai_category"
+    ],
+    "core_ai_digest_signal": true,
+    "significance_score": 6,
+    "significance_reasons": [
+      "ai_relevance=3",
+      "china_review",
+      "has_arxiv_id"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Stream3D: Sequential Multi-View 3D Generation via Evidential Memory",
+      "authors": [
+        "Kaichen Zhou",
+        "Zeyang Bai",
+        "Xinhai Chang",
+        "Mengyu Wang",
+        "Paul Liang",
+        "Fangneng Zhan"
+      ],
+      "summary": "View-conditioned 3D generators such as SAM 3D, TRELLIS and Hunyuan3D produce high-quality object reconstructions from a single view, but real-world visual observation often arrives as long monocular streams. Naively applying these generators to each streaming frame independently leads to severe temporal inconsistency in the generated results. To address this problem, we propose Stream3D, the first training-free streaming mechanism that turns a frozen view-conditioned 3D generator into a streaming generator with constant cross-chunk memory. Stream3D achieves this by maintaining a compact evidential memory, which selectively caches the most informative historical frames based on a proposed evidence score mechanism. As the stream progresses, the memory dynamically updates to retain a fixed number of informative frames, preventing the memory footprint from growing linearly with sequence length. This also prevents degradation over long sequences and keeps the underlying generator completely unchanged without retraining, architectural modifications, or auxiliary losses. Evaluated on both realistic and synthetic streaming benchmarks, Stream3D outperforms latent-transport baselines, including KV-cache reuse and flow-based feature editing, across both photometric and geometric metrics. More details can be found at: https://anonymous-submission-20.github.io/streaming3D.github.io/.",
+      "published": "2026-05-20T17:55:16Z",
+      "updated": "2026-05-20T17:55:16Z",
+      "arxiv_id": "2605.21472v1",
+      "url": "http://arxiv.org/abs/2605.21472v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "Neural Negative Binomial Regression for Weekly Seismicity Forecasting: Per-Cell Dispersion Estimation and Tail Risk Assessment",
+    "source": "arXiv",
+    "arxiv_id": "2605.21437v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21437v1",
+    "published": "2026-05-20T17:27:27Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "ambiguous_model_alias_needs_review"
+    ],
+    "china_match_terms": [
+      "GLM"
+    ],
+    "ai_relevance_score": 3,
+    "ai_relevance_reasons": [
+      "ai_category"
+    ],
+    "core_ai_digest_signal": false,
+    "significance_score": 6,
+    "significance_reasons": [
+      "ai_relevance=3",
+      "china_review",
+      "has_arxiv_id"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "Neural Negative Binomial Regression for Weekly Seismicity Forecasting: Per-Cell Dispersion Estimation and Tail Risk Assessment",
+      "authors": [
+        "Alim Igilik"
+      ],
+      "summary": "Standard approaches to forecasting the weekly number of earthquakes on a spatial grid rely on the Poisson distribution with a single global dispersion assumption. We show that this assumption is systematically violated in seismic data from Central Asia (2010-2024), where a likelihood-ratio test with boundary correction strongly rejects the Poisson hypothesis (p < 10^{-179}). The main contribution of this work is the EarthquakeNet architecture, which provides an endogenous per-cell estimate of the overdispersion parameter alpha via a neural network (spatial embeddings + MLP), without explicit spatial covariance specification. In contrast to existing negative binomial regression approaches in seismological forecasting, which typically assume a single global alpha, the proposed per-cell formulation allows the model to identify spatial heterogeneity in seismic clustering and to construct probabilistic risk-aware alerts via quantiles of the predicted distribution. A walk-forward evaluation (2018-2023) over four systems shows an 8.6 percent reduction in mean pinball deviation (MPD) relative to a negative binomial GLM baseline. The strongest improvements are observed in the tail regime (Y >= 5), where the continuous ranked probability score (CRPS) of the proposed model is 12.5 percent lower than that of the baseline, indicating improved calibration in extreme-event forecasting.",
+      "published": "2026-05-20T17:27:27Z",
+      "updated": "2026-05-20T17:27:27Z",
+      "arxiv_id": "2605.21437v1",
+      "url": "http://arxiv.org/abs/2605.21437v1",
+      "categories": [
+        "physics.geo-ph",
+        "cs.LG",
+        "stat.ML"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  },
+  {
+    "title": "OCTOPUS: Optimized KV Cache for Transformers via Octahedral Parametrization Under optimal Squared error quantization",
+    "source": "arXiv",
+    "arxiv_id": "2605.21226v1",
+    "openalex_id": null,
+    "openalex_title": null,
+    "openalex_match_score": null,
+    "openalex_match_method": null,
+    "openalex_match_accepted": false,
+    "doi": null,
+    "url": "http://arxiv.org/abs/2605.21226v1",
+    "published": "2026-05-20T14:19:51Z",
+    "institutions": [],
+    "countries": [],
+    "is_china_affiliated": true,
+    "china_affiliation_level": "review",
+    "china_match_methods": [
+      "ambiguous_model_alias_needs_review"
+    ],
+    "china_match_terms": [
+      "Seed"
+    ],
+    "ai_relevance_score": 3,
+    "ai_relevance_reasons": [
+      "ai_category"
+    ],
+    "core_ai_digest_signal": false,
+    "significance_score": 6,
+    "significance_reasons": [
+      "ai_relevance=3",
+      "china_review",
+      "has_arxiv_id"
+    ],
+    "cited_by_count": null,
+    "needs_review": true,
+    "include_in_digest": false,
+    "original": {
+      "source": "arXiv",
+      "title": "OCTOPUS: Optimized KV Cache for Transformers via Octahedral Parametrization Under optimal Squared error quantization",
+      "authors": [
+        "Mark Boss",
+        "Vikram Voleti",
+        "Simon Donné",
+        "Shimon Vainer"
+      ],
+      "summary": "The key-value (KV) cache dominates memory bandwidth and footprint in long-context autoregressive inference. Recent rotation-preconditioned codecs (TurboQuant, PolarQuant) show that a structured random rotation followed by a per-coordinate scalar quantizer matched to an analytically tractable marginal is a near-optimal recipe for KV compression. OCTOPUS advances this paradigm through joint quantization of rotated coordinate triplets. Each triplet's direction is mapped to a square via an octahedral parameterization, and the two resulting coordinates and the triplet norm are Lloyd-Max quantized against implementation-matched marginals. Optimizing the per-triplet squared error gives a strictly non-uniform bit allocation depending only on the total dimensionality of the keys. We find the finite-dimensional quality optimum with sweeps to be constant on every real decoder we test. The codec is data-oblivious, online, and deterministic given a seed. Across text, video, and audio, OCTOPUS matches or beats every prior rotation codec at every reported bit width and metric, with a lead that grows as bits drop for extreme compression. Furthermore, a fused Triton implementation reconstructs keys on the fly without materializing the uncompressed key, so the codec adds no decode-time bandwidth or latency over the existing dequantization. Project Page: https://octopus-quant.github.io/",
+      "published": "2026-05-20T14:19:51Z",
+      "updated": "2026-05-20T14:19:51Z",
+      "arxiv_id": "2605.21226v1",
+      "url": "http://arxiv.org/abs/2605.21226v1",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "doi": null,
+      "openalex_id": null,
+      "openalex_title": null,
+      "openalex_doi": null,
+      "openalex_match_score": null,
+      "openalex_match_method": null,
+      "openalex_match_accepted": false,
+      "institutions": null,
+      "countries": null,
+      "cited_by_count": null
+    }
+  }
+]
