@@ -32,7 +32,7 @@ jobs:
           # Conservative coverage settings for safe test runs.
           # Later, increase these to avoid only selecting/summarizing one paper.
           ARXIV_BATCH_SIZE: "50"
-          ARXIV_MAX_PAGES: "5"
+          ARXIV_MAX_PAGES: "10"
           OPENALEX_MAX_PAPERS: "300"
 
           # Safe OpenAlex pacing.
