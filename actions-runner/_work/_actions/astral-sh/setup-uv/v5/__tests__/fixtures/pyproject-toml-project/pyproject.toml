@@ -1,0 +1,19 @@
+[project]
+name = "pyproject-toml-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "reuse==5.0.2",
+  {include-group = "lint"},
+]
+lint = [
+  "flake8==4.0.1",
+]
+
+[tool.uv]
+required-version = "==0.5.14"
