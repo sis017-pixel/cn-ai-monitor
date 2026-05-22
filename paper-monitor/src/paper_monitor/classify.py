@@ -652,6 +652,7 @@ def classify_paper(
     model_aliases:set[str],
     min_ai_score:int,
     min_significance_score:int,
+    min_review_significance_score:int,
 )->dict[str,Any]:
     ai=classify_ai_relevance(paper)
     china=classify_china_affiliation(paper,institution_aliases,model_aliases)
@@ -678,13 +679,36 @@ def classify_paper(
         ):
             needs_review=True
 
-    include=(
+    strong_include=(
         china.is_china_affiliated
         and china.level=="strong"
         and ai.score>=min_ai_score
         and sig.score>=min_significance_score
         and core_ai_signal
     )
+
+    review_include=(
+        china.is_china_affiliated
+        and china.level=="review"
+        and ai.score>=min_ai_score
+        and sig.score>=min_review_significance_score
+        and core_ai_signal
+    )
+
+    include=strong_include or review_include
+
+    if review_include:
+        needs_review=True
+
+    if strong_include:
+        digest_selection_level="strong"
+        digest_selection_reason="verified_china_affiliation"
+    elif review_include:
+        digest_selection_level="review"
+        digest_selection_reason="high_significance_review_candidate"
+    else:
+        digest_selection_level="none"
+        digest_selection_reason="not_selected"
 
     return {
         "title":paper.get("title"),
@@ -712,6 +736,10 @@ def classify_paper(
         "cited_by_count":paper.get("cited_by_count"),
         "needs_review":needs_review,
         "include_in_digest":include,
+        "digest_selection_level":digest_selection_level,
+        "digest_selection_reason":digest_selection_reason,
+        "selected_via_review_gate":review_include,
+        "review_significance_threshold":min_review_significance_score,
         "original":paper,
     }
 
@@ -860,6 +888,12 @@ def main(argv:Optional[list[str]]=None)->int:
 
     parser.add_argument("--min-ai-score",type=int,default=3)
     parser.add_argument("--min-significance-score",type=int,default=8)
+    parser.add_argument(
+        "--min-review-significance-score",
+        type=int,
+        default=12,
+        help="Minimum significance score for review-level China-affiliated papers to enter selected_papers.",
+    )
     parser.add_argument("--top",type=int,default=10)
 
     args=parser.parse_args(argv)
@@ -921,6 +955,7 @@ def main(argv:Optional[list[str]]=None)->int:
             model_aliases,
             args.min_ai_score,
             args.min_significance_score,
+            args.min_review_significance_score,
         )
         classified.append(record)
 
@@ -968,6 +1003,8 @@ def main(argv:Optional[list[str]]=None)->int:
     china_review=sum(1 for r in deduped if r["china_affiliation_level"]=="review")
     needs_review_count=sum(1 for r in deduped if r["needs_review"])
     core_ai_count=sum(1 for r in deduped if r.get("core_ai_digest_signal"))
+    selected_strong=sum(1 for r in selected if r.get("digest_selection_level")=="strong")
+    selected_review=sum(1 for r in selected if r.get("digest_selection_level")=="review")
 
     summary={
         "run_date":datetime.now().isoformat(timespec="seconds"),
@@ -979,6 +1016,7 @@ def main(argv:Optional[list[str]]=None)->int:
         "thresholds":{
             "min_ai_score":args.min_ai_score,
             "min_significance_score":args.min_significance_score,
+            "min_review_significance_score":args.min_review_significance_score,
             "requires_core_ai_digest_signal":True,
         },
         "counts":{
@@ -989,6 +1027,8 @@ def main(argv:Optional[list[str]]=None)->int:
             "china_strong":china_strong,
             "china_review":china_review,
             "selected":len(selected),
+            "selected_strong":selected_strong,
+            "selected_review":selected_review,
             "review_candidates":len(review_candidates),
             "needs_review":needs_review_count,
         },
@@ -1014,6 +1054,8 @@ def main(argv:Optional[list[str]]=None)->int:
     print("  strong:                "+str(china_strong))
     print("  review:                "+str(china_review))
     print("selected for digest:     "+str(len(selected)))
+    print("  selected strong:       "+str(selected_strong))
+    print("  selected review:       "+str(selected_review))
     print("review candidates:       "+str(len(review_candidates)))
     print("needs review:            "+str(needs_review_count))
     print("")
@@ -1051,6 +1093,7 @@ def main(argv:Optional[list[str]]=None)->int:
         print("     arxiv_id:     "+str(arxiv_id))
         print("     openalex_id:  "+str(openalex_id))
         print("     oa_match:     "+str(match_method)+" "+str(match_score))
+        print("     selection:    "+str(record.get("digest_selection_level"))+" | "+str(record.get("digest_selection_reason")))
 
     return 0
 
