@@ -29,6 +29,9 @@ USER_AGENT=f"UCSDPaperMonitorBot/1.0 (mailto:{CONTACT_EMAIL})"
 ARXIV_DAYS=int(os.getenv("ARXIV_DAYS","7"))
 ARXIV_BATCH_SIZE=int(os.getenv("ARXIV_BATCH_SIZE","100"))
 ARXIV_MAX_PAGES=int(os.getenv("ARXIV_MAX_PAGES","0"))
+ARXIV_SLEEP_SECONDS=float(os.getenv("ARXIV_SLEEP_SECONDS","6"))
+ARXIV_RETRIES=int(os.getenv("ARXIV_RETRIES","4"))
+ARXIV_RETRY_BASE_SECONDS=int(os.getenv("ARXIV_RETRY_BASE_SECONDS","60"))
 
 OPENALEX_WORKERS=int(os.getenv("OPENALEX_WORKERS","4"))
 OPENALEX_SLEEP_SECONDS=float(os.getenv("OPENALEX_SLEEP_SECONDS","0.15"))
@@ -255,13 +258,51 @@ def fetch_arxiv_recent(
 
         print(f"Fetching arXiv page {page}: start={start}, batch_size={batch_size}...")
 
-        response=session.get(ARXIV_API_URL,params=params,timeout=60)
+        response=None
 
-        if response.status_code==429:
-            print("\nWARNING: arXiv rate limit hit. Stopping fetch early and saving gathered papers.")
+        for attempt in range(1,ARXIV_RETRIES+1):
+            try:
+                response=session.get(
+                    ARXIV_API_URL,
+                    params=params,
+                    timeout=(10,180),
+                )
+
+                if response.status_code==200:
+                    break
+
+                if response.status_code in (429,503):
+                    retry_after=response.headers.get("Retry-After")
+
+                    if retry_after and retry_after.isdigit():
+                        wait_seconds=int(retry_after)
+                    else:
+                        wait_seconds=ARXIV_RETRY_BASE_SECONDS*attempt
+
+                    print(
+                        f"\nWARNING: arXiv returned {response.status_code} on page {page}, "
+                        f"attempt {attempt}/{ARXIV_RETRIES}."
+                    )
+                    print(f"Waiting {wait_seconds} seconds before retry...")
+                    time.sleep(wait_seconds)
+                    continue
+
+                response.raise_for_status()
+                break
+
+            except requests.RequestException as exc:
+                wait_seconds=ARXIV_RETRY_BASE_SECONDS*attempt
+                print(
+                    f"\nWARNING: arXiv request failed on page {page}, "
+                    f"attempt {attempt}/{ARXIV_RETRIES}: {exc}"
+                )
+                print(f"Waiting {wait_seconds} seconds before retry...")
+                time.sleep(wait_seconds)
+
+        if response is None or response.status_code!=200:
+            print("\nWARNING: arXiv did not return a valid page after retries.")
+            print("Stopping arXiv fetch early and saving gathered papers.")
             break
-
-        response.raise_for_status()
 
         root=ET.fromstring(response.text)
         entries=root.findall(f"{ATOM_NS}entry")

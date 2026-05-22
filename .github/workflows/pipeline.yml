@@ -37,10 +37,13 @@ jobs:
           CONTACT_EMAIL: sis017@ucsd.edu
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
 
-          ARXIV_BATCH_SIZE: "100"
+          ARXIV_BATCH_SIZE: "50"
           ARXIV_MAX_PAGES: "10"
-          OPENALEX_MAX_PAPERS: "800"
+          ARXIV_SLEEP_SECONDS: "6"
+          ARXIV_RETRIES: "4"
+          ARXIV_RETRY_BASE_SECONDS: "60"
 
+          OPENALEX_MAX_PAPERS: "500"
           OPENALEX_WORKERS: "2"
           OPENALEX_SLEEP_SECONDS: "0.35"
           OPENALEX_MIN_TITLE_SCORE: "0.85"
