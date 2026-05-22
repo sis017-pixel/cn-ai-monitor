@@ -47,6 +47,7 @@ jobs:
           OPENALEX_WORKERS: "2"
           OPENALEX_SLEEP_SECONDS: "0.35"
           OPENALEX_MIN_TITLE_SCORE: "0.85"
+          OPENALEX_PER_PAGE: "10"
         run: uv run python src/paper_monitor/fetch.py
 
       - name: Validate fetch output
