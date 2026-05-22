@@ -98,9 +98,14 @@ jobs:
           "latest_file=$relative" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           Write-Host "Latest selected file: $relative"
 
-      - name: Run summary layer
+       - name: Run summary layer
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          USE_DEEPSEEK_SUMMARY: "true"
+          DEEPSEEK_MODEL: "deepseek-v4-flash"
+          DEEPSEEK_SLEEP_SECONDS: "0.5"
+          DEEPSEEK_RETRIES: "3"
+          DEEPSEEK_RETRY_BASE_SECONDS: "10"
         run: uv run python src/paper_monitor/summarize.py --input "${{ steps.latest_selected.outputs.latest_file }}"
 
       - name: Validate summary output
