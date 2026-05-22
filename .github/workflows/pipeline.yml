@@ -98,6 +98,19 @@ jobs:
           "latest_file=$relative" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           Write-Host "Latest selected file: $relative"
 
+      - name: Run Claude verification layer
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: "claude-sonnet-4-5-20250929"
+          ANTHROPIC_TEMPERATURE: "0"
+          ANTHROPIC_MAX_TOKENS: "1200"
+          ANTHROPIC_RETRIES: "3"
+          ANTHROPIC_RETRY_BASE_SECONDS: "10"
+          ANTHROPIC_SLEEP_SECONDS: "0.5"
+          CLAUDE_VERIFY_TOP: "0"
+          CLAUDE_INCLUDE_LIKELY: "true"
+        run: uv run python src/paper_monitor/verify.py --input "${{ steps.latest_selected.outputs.latest_file }}"
+
       - name: Run summary layer
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
@@ -138,3 +151,6 @@ jobs:
             paper-monitor/data/raw/*.json
             paper-monitor/data/processed/*.json
             paper-monitor/data/processed/*.md
+            paper-monitor/data/processed/verification_results_*.json
+            paper-monitor/data/processed/verified_papers_*.json
+            paper-monitor/data/processed/verification_report_*.md
