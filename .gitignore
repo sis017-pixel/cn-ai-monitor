@@ -1,0 +1,6 @@
+
+actions-runner/
+paper-monitor/.venv/
+paper-monitor/data/raw/*.json
+paper-monitor/data/processed/*.json
+paper-monitor/data/processed/*.md
