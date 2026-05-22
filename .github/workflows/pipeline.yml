@@ -28,9 +28,14 @@ jobs:
         env:
           CONTACT_EMAIL: sis017@ucsd.edu
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+
+          # Conservative coverage settings for safe test runs.
+          # Later, increase these to avoid only selecting/summarizing one paper.
           ARXIV_BATCH_SIZE: "50"
           ARXIV_MAX_PAGES: "5"
           OPENALEX_MAX_PAPERS: "300"
+
+          # Safe OpenAlex pacing.
           OPENALEX_WORKERS: "2"
           OPENALEX_SLEEP_SECONDS: "0.25"
           OPENALEX_MIN_TITLE_SCORE: "0.85"
@@ -47,6 +52,19 @@ jobs:
       - name: Run classification layer
         run: uv run python src/paper_monitor/classify.py --input "${{ steps.latest_raw.outputs.latest_file }}"
 
+      - name: Find latest selected paper file
+        id: latest_selected
+        shell: bash
+        run: |
+          latest_file=$(ls -t data/processed/selected_papers_*.json | head -n 1)
+          echo "latest_file=$latest_file" >> "$GITHUB_OUTPUT"
+          echo "Latest selected file: $latest_file"
+
+      - name: Run summary layer
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: uv run python src/paper_monitor/summarize.py --input "${{ steps.latest_selected.outputs.latest_file }}"
+
       - name: Upload raw and processed data
         uses: actions/upload-artifact@v4
         with:
@@ -54,3 +72,4 @@ jobs:
           path: |
             paper-monitor/data/raw/*.json
             paper-monitor/data/processed/*.json
+            paper-monitor/data/processed/*.md
