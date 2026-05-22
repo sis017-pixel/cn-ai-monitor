@@ -24,22 +24,45 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
+      - name: Clean old generated data
+        run: |
+          rm -rf data/raw data/processed
+          mkdir -p data/raw data/processed
+
       - name: Run fetch layer
         env:
           CONTACT_EMAIL: sis017@ucsd.edu
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
 
-          # Conservative coverage settings for safe test runs.
-          # Later, increase these to avoid only selecting/summarizing one paper.
-          ARXIV_BATCH_SIZE: "50"
+          # Coverage settings.
+          # If the run only selects/summarizes one paper, increase these later.
+          ARXIV_BATCH_SIZE: "100"
           ARXIV_MAX_PAGES: "10"
-          OPENALEX_MAX_PAPERS: "300"
+          OPENALEX_MAX_PAPERS: "800"
 
           # Safe OpenAlex pacing.
           OPENALEX_WORKERS: "2"
-          OPENALEX_SLEEP_SECONDS: "0.25"
+          OPENALEX_SLEEP_SECONDS: "0.35"
           OPENALEX_MIN_TITLE_SCORE: "0.85"
         run: uv run python src/paper_monitor/fetch.py
+
+      - name: Validate fetch output
+        shell: bash
+        run: |
+          latest_file=$(ls -t data/raw/papers_*.json 2>/dev/null | head -n 1 || true)
+
+          if [ -z "$latest_file" ]; then
+            echo "ERROR: fetch.py did not create any raw paper file."
+            exit 1
+          fi
+
+          count=$(python -c "import json; print(len(json.load(open('$latest_file', encoding='utf-8'))))")
+          echo "Fetched paper count: $count"
+
+          if [ "$count" -eq 0 ]; then
+            echo "ERROR: fetch.py produced zero papers."
+            exit 1
+          fi
 
       - name: Find latest raw paper file
         id: latest_raw
@@ -51,6 +74,22 @@ jobs:
 
       - name: Run classification layer
         run: uv run python src/paper_monitor/classify.py --input "${{ steps.latest_raw.outputs.latest_file }}"
+
+      - name: Validate classification output
+        shell: bash
+        run: |
+          latest_file=$(ls -t data/processed/selected_papers_*.json 2>/dev/null | head -n 1 || true)
+
+          if [ -z "$latest_file" ]; then
+            echo "ERROR: classify.py did not create selected_papers_*.json."
+            exit 1
+          fi
+
+          count=$(python -c "import json; print(len(json.load(open('$latest_file', encoding='utf-8'))))")
+          echo "Selected paper count: $count"
+
+          # Empty selected_papers is allowed because a strict filter may select zero papers.
+          # summarize.py will still create empty summaries files.
 
       - name: Find latest selected paper file
         id: latest_selected
@@ -64,6 +103,27 @@ jobs:
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: uv run python src/paper_monitor/summarize.py --input "${{ steps.latest_selected.outputs.latest_file }}"
+
+      - name: Validate summary output
+        shell: bash
+        run: |
+          latest_json=$(ls -t data/processed/summaries_*.json 2>/dev/null | head -n 1 || true)
+          latest_md=$(ls -t data/processed/summaries_*.md 2>/dev/null | head -n 1 || true)
+
+          if [ -z "$latest_json" ]; then
+            echo "ERROR: summarize.py did not create summaries_*.json."
+            exit 1
+          fi
+
+          if [ -z "$latest_md" ]; then
+            echo "ERROR: summarize.py did not create summaries_*.md."
+            exit 1
+          fi
+
+          count=$(python -c "import json; print(len(json.load(open('$latest_json', encoding='utf-8'))))")
+          echo "Summary count: $count"
+          echo "Summary JSON: $latest_json"
+          echo "Summary Markdown: $latest_md"
 
       - name: Upload raw and processed data
         uses: actions/upload-artifact@v4
