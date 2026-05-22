@@ -27,16 +27,23 @@ OPENALEX_API_KEY=os.getenv("OPENALEX_API_KEY")
 USER_AGENT=f"UCSDPaperMonitorBot/1.0 (mailto:{CONTACT_EMAIL})"
 
 ARXIV_DAYS=int(os.getenv("ARXIV_DAYS","7"))
-ARXIV_BATCH_SIZE=int(os.getenv("ARXIV_BATCH_SIZE","100"))
-ARXIV_MAX_PAGES=int(os.getenv("ARXIV_MAX_PAGES","0"))
+ARXIV_BATCH_SIZE=int(os.getenv("ARXIV_BATCH_SIZE","50"))
+ARXIV_MAX_PAGES=int(os.getenv("ARXIV_MAX_PAGES","10"))
 ARXIV_SLEEP_SECONDS=float(os.getenv("ARXIV_SLEEP_SECONDS","6"))
 ARXIV_RETRIES=int(os.getenv("ARXIV_RETRIES","4"))
 ARXIV_RETRY_BASE_SECONDS=int(os.getenv("ARXIV_RETRY_BASE_SECONDS","60"))
+ARXIV_PREFLIGHT_CHECK=os.getenv("ARXIV_PREFLIGHT_CHECK","true").strip().lower() not in {
+    "0",
+    "false",
+    "no",
+    "off",
+}
 
-OPENALEX_WORKERS=int(os.getenv("OPENALEX_WORKERS","4"))
-OPENALEX_SLEEP_SECONDS=float(os.getenv("OPENALEX_SLEEP_SECONDS","0.15"))
-OPENALEX_MAX_PAPERS=int(os.getenv("OPENALEX_MAX_PAPERS","0"))
-OPENALEX_MIN_TITLE_SCORE=float(os.getenv("OPENALEX_MIN_TITLE_SCORE","0.88"))
+OPENALEX_WORKERS=int(os.getenv("OPENALEX_WORKERS","2"))
+OPENALEX_SLEEP_SECONDS=float(os.getenv("OPENALEX_SLEEP_SECONDS","0.35"))
+OPENALEX_MAX_PAPERS=int(os.getenv("OPENALEX_MAX_PAPERS","500"))
+OPENALEX_MIN_TITLE_SCORE=float(os.getenv("OPENALEX_MIN_TITLE_SCORE","0.85"))
+OPENALEX_PER_PAGE=max(1,min(int(os.getenv("OPENALEX_PER_PAGE","5")),100))
 
 AI_CATEGORIES=[
     "cs.CL",
@@ -66,6 +73,8 @@ class Paper:
     openalex_match_score:float|None=None
     openalex_match_method:str|None=None
     openalex_match_accepted:bool=False
+    openalex_candidates_returned:int|None=None
+    openalex_candidates_checked:int|None=None
     institutions:list[str]|None=None
     countries:list[str]|None=None
     cited_by_count:int|None=None
@@ -74,6 +83,7 @@ class Paper:
 def clean_text(text:str|None)->str:
     if not text:
         return ""
+
     return " ".join(text.split())
 
 
@@ -87,6 +97,7 @@ def normalize_title(title:str|None)->str:
 def clean_arxiv_id(arxiv_id:str|None)->str|None:
     if not arxiv_id:
         return None
+
     cleaned=arxiv_id.strip().lower()
     cleaned=re.sub(r"^arxiv:","",cleaned)
     cleaned=re.sub(r"v\d+$","",cleaned)
@@ -96,6 +107,7 @@ def clean_arxiv_id(arxiv_id:str|None)->str|None:
 def clean_doi(doi:str|None)->str|None:
     if not doi:
         return None
+
     cleaned=doi.strip().lower()
     cleaned=cleaned.replace("https://doi.org/","")
     cleaned=cleaned.replace("http://doi.org/","")
@@ -178,6 +190,61 @@ def validate_openalex_match(paper:Paper,work:dict[str,Any])->tuple[bool,str,floa
     return False,"rejected_title_mismatch",round(score,4)
 
 
+def match_priority(method:str)->int:
+    if method=="arxiv_id":
+        return 3
+
+    if method=="doi":
+        return 2
+
+    if method=="title_similarity":
+        return 1
+
+    return 0
+
+
+def choose_best_openalex_work(
+    paper:Paper,
+    results:list[dict[str,Any]],
+)->tuple[dict[str,Any]|None,bool,str,float]:
+    best_work=None
+    best_accepted=False
+    best_method="no_match"
+    best_score=0.0
+    best_priority=0
+
+    for candidate in results:
+        if not isinstance(candidate,dict):
+            continue
+
+        accepted,method,score=validate_openalex_match(paper,candidate)
+        priority=match_priority(method)
+
+        should_replace=False
+
+        if accepted and not best_accepted:
+            should_replace=True
+        elif accepted and best_accepted:
+            if priority>best_priority:
+                should_replace=True
+            elif priority==best_priority and score>best_score:
+                should_replace=True
+        elif not accepted and not best_accepted and score>best_score:
+            should_replace=True
+
+        if should_replace:
+            best_work=candidate
+            best_accepted=accepted
+            best_method=method
+            best_score=score
+            best_priority=priority
+
+        if accepted and method in {"arxiv_id","doi"}:
+            break
+
+    return best_work,best_accepted,best_method,best_score
+
+
 def check_arxiv_ip_status()->bool:
     print("Performing pre-flight check on arXiv API...")
 
@@ -198,6 +265,10 @@ def check_arxiv_ip_status()->bool:
 
         if response.status_code==429:
             return False
+
+        if response.status_code in (500,502,503,504):
+            print(f"arXiv pre-flight returned transient status {response.status_code}. Continuing to real fetch with retries.")
+            return True
 
         response.raise_for_status()
         return True
@@ -271,7 +342,7 @@ def fetch_arxiv_recent(
                 if response.status_code==200:
                     break
 
-                if response.status_code in (429,503):
+                if response.status_code in (429,500,502,503,504):
                     retry_after=response.headers.get("Retry-After")
 
                     if retry_after and retry_after.isdigit():
@@ -366,7 +437,7 @@ def fetch_arxiv_recent(
         page+=1
 
         if not reached_cutoff:
-            time.sleep(4)
+            time.sleep(ARXIV_SLEEP_SECONDS)
 
     return papers
 
@@ -375,7 +446,7 @@ def enrich_single_paper(session:requests.Session,paper:Paper)->Paper:
     params={
         "search":paper.title,
         "filter":"institutions.country_code:CN",
-        "per_page":1,
+        "per_page":OPENALEX_PER_PAGE,
         "select":"id,title,display_name,authorships,cited_by_count,publication_date,doi,ids",
         "mailto":CONTACT_EMAIL,
     }
@@ -399,11 +470,19 @@ def enrich_single_paper(session:requests.Session,paper:Paper)->Paper:
         data=response.json()
         results=data.get("results",[])
 
+        if not isinstance(results,list):
+            return paper
+
+        paper.openalex_candidates_returned=len(results)
+        paper.openalex_candidates_checked=len(results)
+
         if not results:
             return paper
 
-        work=results[0]
-        accepted,method,score=validate_openalex_match(paper,work)
+        work,accepted,method,score=choose_best_openalex_work(paper,results)
+
+        if work is None:
+            return paper
 
         paper.openalex_title=get_work_title(work)
         paper.openalex_doi=get_work_doi(work)
@@ -418,7 +497,13 @@ def enrich_single_paper(session:requests.Session,paper:Paper)->Paper:
         countries=[]
 
         for authorship in work.get("authorships",[]):
+            if not isinstance(authorship,dict):
+                continue
+
             for inst in authorship.get("institutions",[]):
+                if not isinstance(inst,dict):
+                    continue
+
                 name=inst.get("display_name")
                 country=inst.get("country_code")
 
@@ -448,20 +533,39 @@ def save_papers(papers:list[Paper],out_path:Path)->None:
 
 
 def main()->None:
-    if not check_arxiv_ip_status():
-        print("\nERROR: Your IP is currently rate-limited by arXiv.")
-        print("Wait 15-30 minutes before running this script again.")
-        print("Exiting safely to avoid extending the rate-limit window.\n")
-        sys.exit(1)
+    if ARXIV_PREFLIGHT_CHECK:
+        if not check_arxiv_ip_status():
+            print("\nERROR: Your IP is currently rate-limited by arXiv.")
+            print("Wait 15-30 minutes before running this script again.")
+            print("Exiting safely to avoid extending the rate-limit window.\n")
+            sys.exit(1)
 
-    print("API check passed.")
-    print("Sleeping 4 seconds before the real arXiv query to respect arXiv pacing.\n")
-    time.sleep(4)
+        print("API check passed.")
+        print("Sleeping 4 seconds before the real arXiv query to respect arXiv pacing.\n")
+        time.sleep(4)
+    else:
+        print("Skipping arXiv pre-flight check because ARXIV_PREFLIGHT_CHECK is disabled.")
 
     if OPENALEX_API_KEY:
         print(f"OpenAlex API key detected. workers={OPENALEX_WORKERS}, sleep={OPENALEX_SLEEP_SECONDS}s.")
     else:
         print("Warning: No OPENALEX_API_KEY detected. Running unauthenticated OpenAlex requests.")
+
+    print("\nConfiguration:")
+    print(f"CONTACT_EMAIL={CONTACT_EMAIL}")
+    print(f"OPENALEX_API_KEY detected={bool(OPENALEX_API_KEY)}")
+    print(f"ARXIV_DAYS={ARXIV_DAYS}")
+    print(f"ARXIV_BATCH_SIZE={ARXIV_BATCH_SIZE}")
+    print(f"ARXIV_MAX_PAGES={ARXIV_MAX_PAGES}")
+    print(f"ARXIV_SLEEP_SECONDS={ARXIV_SLEEP_SECONDS}")
+    print(f"ARXIV_RETRIES={ARXIV_RETRIES}")
+    print(f"ARXIV_RETRY_BASE_SECONDS={ARXIV_RETRY_BASE_SECONDS}")
+    print(f"ARXIV_PREFLIGHT_CHECK={ARXIV_PREFLIGHT_CHECK}")
+    print(f"OPENALEX_MAX_PAPERS={OPENALEX_MAX_PAPERS}")
+    print(f"OPENALEX_WORKERS={OPENALEX_WORKERS}")
+    print(f"OPENALEX_SLEEP_SECONDS={OPENALEX_SLEEP_SECONDS}")
+    print(f"OPENALEX_MIN_TITLE_SCORE={OPENALEX_MIN_TITLE_SCORE}")
+    print(f"OPENALEX_PER_PAGE={OPENALEX_PER_PAGE}")
 
     session=get_retry_session()
 
@@ -485,7 +589,7 @@ def main()->None:
 
     print(
         f"\nEnriching with OpenAlex using verified matching "
-        f"(workers={OPENALEX_WORKERS}, min_title_score={OPENALEX_MIN_TITLE_SCORE})..."
+        f"(workers={OPENALEX_WORKERS}, min_title_score={OPENALEX_MIN_TITLE_SCORE}, per_page={OPENALEX_PER_PAGE})..."
     )
 
     enriched_papers=[]
@@ -517,9 +621,15 @@ def main()->None:
         if paper.openalex_match_method=="rejected_title_mismatch"
     ]
 
+    total_candidates=sum(
+        paper.openalex_candidates_returned or 0
+        for paper in enriched_papers
+    )
+
     print(f"\nDONE.")
     print(f"OpenAlex accepted matches: {len(accepted_matches)} / {len(enriched_papers)}")
     print(f"Rejected OpenAlex title mismatches: {len(rejected_matches)}")
+    print(f"OpenAlex candidates returned: {total_candidates}")
     print(f"Matched {len(cn_matches)} papers with verified CN institution signals.")
     print(f"Saved raw data to {out_path}")
 
@@ -531,6 +641,7 @@ def main()->None:
         print("arXiv:",paper.arxiv_id)
         print("OpenAlex:",paper.openalex_id)
         print("Match:",paper.openalex_match_method,paper.openalex_match_score)
+        print("Candidates returned:",paper.openalex_candidates_returned)
 
 
 if __name__=="__main__":
