@@ -5,11 +5,12 @@ on:
 
 jobs:
   run-pipeline:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, windows, x64, cn-ai-monitor]
 
     defaults:
       run:
         working-directory: paper-monitor
+        shell: powershell
 
     steps:
       - name: Check out repo
@@ -26,78 +27,72 @@ jobs:
 
       - name: Clean old generated data
         run: |
-          rm -rf data/raw data/processed
-          mkdir -p data/raw data/processed
+          if (Test-Path data/raw) { Remove-Item data/raw -Recurse -Force }
+          if (Test-Path data/processed) { Remove-Item data/processed -Recurse -Force }
+          New-Item -ItemType Directory -Force -Path data/raw | Out-Null
+          New-Item -ItemType Directory -Force -Path data/processed | Out-Null
 
       - name: Run fetch layer
         env:
           CONTACT_EMAIL: sis017@ucsd.edu
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
 
-          # Coverage settings.
-          # If the run only selects/summarizes one paper, increase these later.
           ARXIV_BATCH_SIZE: "100"
           ARXIV_MAX_PAGES: "10"
           OPENALEX_MAX_PAPERS: "800"
 
-          # Safe OpenAlex pacing.
           OPENALEX_WORKERS: "2"
           OPENALEX_SLEEP_SECONDS: "0.35"
           OPENALEX_MIN_TITLE_SCORE: "0.85"
         run: uv run python src/paper_monitor/fetch.py
 
       - name: Validate fetch output
-        shell: bash
         run: |
-          latest_file=$(ls -t data/raw/papers_*.json 2>/dev/null | head -n 1 || true)
+          $latestFile = Get-ChildItem data/raw/papers_*.json -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 
-          if [ -z "$latest_file" ]; then
-            echo "ERROR: fetch.py did not create any raw paper file."
+          if (-not $latestFile) {
+            Write-Error "fetch.py did not create any raw paper file."
             exit 1
-          fi
+          }
 
-          count=$(python -c "import json; print(len(json.load(open('$latest_file', encoding='utf-8'))))")
-          echo "Fetched paper count: $count"
+          $count = python -c "import json; print(len(json.load(open(r'$($latestFile.FullName)', encoding='utf-8'))))"
+          Write-Host "Fetched paper count: $count"
 
-          if [ "$count" -eq 0 ]; then
-            echo "ERROR: fetch.py produced zero papers."
+          if ([int]$count -eq 0) {
+            Write-Error "fetch.py produced zero papers."
             exit 1
-          fi
+          }
 
       - name: Find latest raw paper file
         id: latest_raw
-        shell: bash
         run: |
-          latest_file=$(ls -t data/raw/papers_*.json | head -n 1)
-          echo "latest_file=$latest_file" >> "$GITHUB_OUTPUT"
-          echo "Latest raw file: $latest_file"
+          $latestFile = Get-ChildItem data/raw/papers_*.json | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+          $relative = "data/raw/" + $latestFile.Name
+          "latest_file=$relative" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          Write-Host "Latest raw file: $relative"
 
       - name: Run classification layer
         run: uv run python src/paper_monitor/classify.py --input "${{ steps.latest_raw.outputs.latest_file }}"
 
       - name: Validate classification output
-        shell: bash
         run: |
-          latest_file=$(ls -t data/processed/selected_papers_*.json 2>/dev/null | head -n 1 || true)
+          $latestFile = Get-ChildItem data/processed/selected_papers_*.json -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 
-          if [ -z "$latest_file" ]; then
-            echo "ERROR: classify.py did not create selected_papers_*.json."
+          if (-not $latestFile) {
+            Write-Error "classify.py did not create selected_papers_*.json."
             exit 1
-          fi
+          }
 
-          count=$(python -c "import json; print(len(json.load(open('$latest_file', encoding='utf-8'))))")
-          echo "Selected paper count: $count"
-
-          # Empty selected_papers is allowed because a strict filter may select zero papers.
-          # summarize.py will still create empty summaries files.
+          $count = python -c "import json; print(len(json.load(open(r'$($latestFile.FullName)', encoding='utf-8'))))"
+          Write-Host "Selected paper count: $count"
 
       - name: Find latest selected paper file
         id: latest_selected
-        shell: bash
         run: |
-          latest_file=$(ls -t data/processed/selected_papers_*.json | head -n 1)
-          echo "latest_file=$latest_file" >> "$GITHUB_OUTPUT"
-          echo "Latest selected file: $latest_file"
+          $latestFile = Get-ChildItem data/processed/selected_papers_*.json | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+          $relative = "data/processed/" + $latestFile.Name
+          "latest_file=$relative" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          Write-Host "Latest selected file: $relative"
 
       - name: Run summary layer
         env:
@@ -105,25 +100,24 @@ jobs:
         run: uv run python src/paper_monitor/summarize.py --input "${{ steps.latest_selected.outputs.latest_file }}"
 
       - name: Validate summary output
-        shell: bash
         run: |
-          latest_json=$(ls -t data/processed/summaries_*.json 2>/dev/null | head -n 1 || true)
-          latest_md=$(ls -t data/processed/summaries_*.md 2>/dev/null | head -n 1 || true)
+          $latestJson = Get-ChildItem data/processed/summaries_*.json -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+          $latestMd = Get-ChildItem data/processed/summaries_*.md -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 
-          if [ -z "$latest_json" ]; then
-            echo "ERROR: summarize.py did not create summaries_*.json."
+          if (-not $latestJson) {
+            Write-Error "summarize.py did not create summaries_*.json."
             exit 1
-          fi
+          }
 
-          if [ -z "$latest_md" ]; then
-            echo "ERROR: summarize.py did not create summaries_*.md."
+          if (-not $latestMd) {
+            Write-Error "summarize.py did not create summaries_*.md."
             exit 1
-          fi
+          }
 
-          count=$(python -c "import json; print(len(json.load(open('$latest_json', encoding='utf-8'))))")
-          echo "Summary count: $count"
-          echo "Summary JSON: $latest_json"
-          echo "Summary Markdown: $latest_md"
+          $count = python -c "import json; print(len(json.load(open(r'$($latestJson.FullName)', encoding='utf-8'))))"
+          Write-Host "Summary count: $count"
+          Write-Host "Summary JSON: $($latestJson.FullName)"
+          Write-Host "Summary Markdown: $($latestMd.FullName)"
 
       - name: Upload raw and processed data
         uses: actions/upload-artifact@v4
