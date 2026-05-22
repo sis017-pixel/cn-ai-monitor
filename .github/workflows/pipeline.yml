@@ -143,6 +143,9 @@ jobs:
           Write-Host "Summary JSON: $($latestJson.FullName)"
           Write-Host "Summary Markdown: $($latestMd.FullName)"
 
+      - name: Run final publishing layer
+        run: uv run python src/paper_monitor/publish.py
+
       - name: Upload raw and processed data
         uses: actions/upload-artifact@v4
         with:
