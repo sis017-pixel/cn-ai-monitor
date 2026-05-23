@@ -146,6 +146,17 @@ jobs:
       - name: Run final publishing layer
         run: uv run python src/paper_monitor/publish.py
 
+      - name: Send digest email
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+          DIGEST_EMAIL_TO: ${{ secrets.DIGEST_EMAIL_TO }}
+          DIGEST_EMAIL_FROM_NAME: "CN AI Digest"
+          DIGEST_EMAIL_SUBJECT_PREFIX: "CN AI Monitor"
+          ATTACH_FULL_DIGEST: "true"
+          EMAIL_DIGEST_TOP_N: "6"
+        run: uv run python src/paper_monitor/email_digest.py
+
       - name: Upload raw and processed data
         uses: actions/upload-artifact@v4
         with:
